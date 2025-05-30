@@ -1,0 +1,105 @@
+.registration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .registration-container {
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .registration-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .registration-logo {
+    width: 60px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .registration-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .registration-description {
+    margin-bottom: 20px;
+  }
+  
+  #registrationForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  #registrationForm input[type="email"],
+  #registrationForm input[type="password"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  #registrationForm button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #formStatus {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  
+  input.error {
+    border: 2px solid #e74c3c !important;
+    background-color: #fceaea;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+  
+  .shake {
+    animation: shake 0.3s ease-in-out;
+  }
+  
+  .plan-details {
+    background-color: #f1f3f5;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  #registrationForm select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 8px;
+  }
+  

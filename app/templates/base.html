@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="IU CAPITAL offers expert trading insights and personalized support tailored to your unique trading goals. Built by traders, for traders—unlock your full market potential with our experienced team.">
+
+    <title>IU Capital - {% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/IU_CAPITAL_FAVICON.png') }}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hero.css') }}">     
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}">     
+    {% block styles %}{% endblock %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+
+</head>
+
+<body>
+  <!-- loaderr -->
+  <div class="loader">    
+    <img src="{{ url_for('static', filename='images/loader/loader.webp') }}" alt="Loading">
+  </div>
+  <!-- loaderr -->
+    <main>
+      <menu>
+        <div class="container">          
+          <a href="/" class="logo">
+            <img src="{{ url_for('static', filename='images/IU_CAPITAL_LOGO.webp') }}" alt="Logo" />
+            <p class="logo_text">IU Capital</p>
+          </a>
+      
+          <nav class="full_screen">
+            <a href="/">Home</a>            
+            <a href="{{ url_for('main.index') }}#services">Services</a>
+            <a href="{{ url_for('main.about') }}">About</a>
+            <a href="{{ url_for('main.history') }}">Performance History</a>
+            <a href="{{ url_for('main.contact') }}">Contact</a>
+            <!-- <a href="{{ url_for('main.login') }}">Login</a> -->
+            
+          </nav>
+                
+          <div class="mobile_menu">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </div>
+      </menu>
+      
+      
+      <nav class="mobile">
+        <a href="/">Home</a>            
+        <a href="{{ url_for('main.index') }}#services">Services</a>
+        <a href="{{ url_for('main.about') }}">About</a>
+        <a href="{{ url_for('main.history') }}">Performance History</a>
+        <a href="{{ url_for('main.contact') }}">Contact</a>
+        <!-- <a href="{{ url_for('main.login') }}">Login</a> -->
+      </nav>
+      <script>
+        const menu_bar_button = document.querySelector(".mobile_menu")
+        const menu_bar = document.querySelector("nav.mobile")
+        menu_bar_button.addEventListener("click", () => {
+          menu_bar.classList.toggle("menu_toggle")
+        })
+      </script>
+      <!-- NAVBAR -->
+
+
+      <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script
+          type="text/javascript"
+          src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+          async
+        >
+            {
+            "symbols"; [
+              {
+                "proName": "FOREXCOM:SPXUSD",
+                "title": "S&P 500 Index"
+              },
+              {
+                "proName": "FOREXCOM:NSXUSD",
+                "title": "US 100 Cash CFD"
+              },
+              {
+                "proName": "FX_IDC:EURUSD",
+                "title": "EUR to USD"
+              },
+              {
+                "proName": "BITSTAMP:BTCUSD",
+                "title": "Bitcoin"
+              },
+              {
+                "proName": "BITSTAMP:ETHUSD",
+                "title": "Ethereum"
+              }
+            ],
+            "showSymbolLogo"; true,
+            "isTransparent"; true,
+            "displayMode"; "regular",
+            "colorTheme"; "light",
+            "locale"; "en"
+          }
+        </script>
+      </div>
+      <!-- TradingView Widget END -->
+
+        {% block content %}       
+        {% endblock %}
+
+
+
+      <!-- (A) HORIZONTAL TICKER -->
+    <div class="hwrap">
+        <div class="hmove">
+          <div class="hitem">
+            <b>Disclaimer</b>: IU Capital LLC. does not make any guarantee or
+            other promise as to any results that may be obtained from using our
+            content. No one should make any investment decision without first
+            consulting his or her own financial advisor and conducting his or her
+            own research and due diligence. To the maximum extent permitted by
+            law, IU Capital LLC disclaims any and all liability in the event any
+            information, commentary, analysis, opinions, advice, and/or
+            recommendations prove to be inaccurate, incomplete, or unreliable, or
+            result in any investment or other losses.
+          </div>
+        </div>
+      </div>
+      <!-- (A) HORIZONTAL TICKER -->
+
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer_content container">
+          <div class="footer1">
+            <div class="footer1_logo">           
+              <img src="{{ url_for('static', filename='images/IU_CAPITAL_LOGO.webp') }}" alt="IU Capital Logo" />              
+              <p>IU CAPITAL</p>
+            </div>
+            <p>
+              <a href="/"><strong>IU CAPITAL</strong></a> is a private equity firm that helps traders share the
+              skills we have acquired over the past 14 years of trading.
+            </p>
+            <div class="footer1_social_logos">
+              <a href="https://discord.gg/iucapital" target="_blank">
+                <i class="fa-brands fa-discord"></i>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61551454222998" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+              <a href="https://twitter.com/IU_Capital" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://www.instagram.com/iu_capital/" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/iu-capital-llc" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://www.youtube.com/@IUCapital" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+          <div class="footer2">
+            <div class="footer_header">Pages</div>
+            <div class="footer_links">
+              <a href="/">Home</a>            
+              <a href="{{ url_for('main.services') }}">Services</a>
+              <a href="{{ url_for('main.about') }}">About</a>
+              <a href="{{ url_for('main.contact') }}">Contact</a>
+            </div>
+          </div>
+          <div class="footer3">
+            <div class="footer_header">Helpful Pages</div>
+            <div class="footer_links">
+              <a href="{{ url_for('main.faq') }}">FAQ</a>
+              <a href="{{ url_for('main.t_and_c') }}">Terms & Conditions</a>
+              <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <div class="footer_bottom">
+        <p>© 2025 IU CAPITAL</p>        
+        <p><a href="https://johnshanahan.com.au" target="_blank" rel="noopener noreferrer">Website Management</a></p>
+    </div>
+</body>
+</html>

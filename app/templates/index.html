@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}"> 
+{% endblock %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-background">
+    <video id="introVideo" autoplay muted playsinline preload="auto" src="{{ url_for('static', filename='images/logo_animation.mp4') }}"></video>
+    <video id="loopVideo" muted playsinline preload="auto" src="{{ url_for('static', filename='images/hero_video_loop.mp4') }}" loop></video>
+  </div>
+</section>
+
+
+<!-- END HERO -->
+
+<!-- ABOUT US -->
+<section class="about">
+  <div class="about_content container">
+    <div class="title_span">
+      <span></span>
+      <p>ABOUT US</p>
+    </div>
+    <h1 class="about_title">IU Capital: Elevate Your Trading Experience</h1>
+
+    <p class="about_sub">
+      At IU Capital, we specialize in algorithmic trading, combining expert strategies, real-time market data, and deep automation capabilities. Whether you're just starting or refining advanced systems, we provide the support and tools to elevate your performance.
+    </p>
+
+    <h2>Why Choose IU Capital?</h2>
+    <p>
+      Our personalized approach means you get more than just signals—you get tailored insights based on your trading style and goals. We believe trading success comes from a balance of strategy, discipline, and constant refinement.
+    </p>
+
+    <h2>What We Offer</h2>
+    <ul class="services_list">
+      <li><strong>Algo Trading Strategies</strong> – Designed by professionals and optimized using backtested data.</li>
+      <li><strong>Real-Time Market Signals</strong> – Get alerts as conditions change, across forex, indices, gold, and crypto.</li>
+      <li><strong>Custom Strategy Development</strong> – Build from scratch or refine your current system with expert guidance.</li>
+      <li><strong>1-on-1 Mentorship</strong> – Learn directly from seasoned traders and developers.</li>
+    </ul>
+
+    <h2>Technology Meets Experience</h2>
+    <p>
+      Our proprietary algorithms scan markets 24/7, while human expertise adds the context machines can’t. This hybrid model gives you responsive, reliable trading support that evolves with the markets.
+    </p>
+
+    <h2>Join the IU Capital Community</h2>
+    <p>
+      Connect with a growing network of traders, receive regular briefings, and get access to our exclusive tools and resources.
+    </p>
+
+    <!-- BUTTON -->
+    <div class="button3">
+      <a href="{{ url_for('main.about') }}">
+        <button>About Us</button>
+      </a>               
+      <span class="span1"></span>
+      <span class="span2"></span>
+    </div>
+    <!-- BUTTON -->
+  </div>
+</section>
+
+
+
+
+<!-- ABOUT US -->
+
+<section id="services" class="services">
+  <div class="container">
+    <p class="title">OUR SERVICES</p>
+    <div class="services_container">
+      <!-- item -->
+      <div class="services_container_item">
+        <img src="{{ url_for('static', filename='images/services/consultation.webp') }}" alt="consultation" />
+        <p class="services_container_item_title">Trading Consultations</p>
+        <p class="services_container_item_content">
+          Whether you're new to trading and seeking guidance on getting
+          started, or an advanced trader aiming to refine your skills,
+          <br /><b>IU CAPITAL </b> is here to help. Book a private
+          consultation with a profitable trader now and learn what it takes
+          to be profitable in trading the markets.
+        </p>
+        <!-- BUTTON 3 -->
+        <div class="button3">
+          <a href="{{ url_for('main.consultations') }}">
+            <button>Learn more</button>
+          </a>   
+          <span class="span1"></span>
+          <span class="span2"></span>
+        </div>
+        <!-- BUTTON 3 -->
+      </div>
+
+      <div class="services_container_item">
+        <img src="{{ url_for('static', filename='images/services/signal.webp') }}" alt="signal" />
+        <p class="services_container_item_title">Automated Trading Signals</p>
+        <p class="services_container_item_content">
+          Built by experienced developers and tested by professional traders, 
+          our advanced trading algorithms are designed for real-world performance. 
+          With our <strong>Automated Trading signals</strong>, you can automatically 
+          copy these same trades into your own account!          
+        </p>
+      
+        <!-- Flex row of buttons -->
+        <div class="button-row">
+          <div class="button3">
+            <a href="{{ url_for('main.signals') }}">
+              <button>Learn more</button>
+            </a>  
+            <span class="span1"></span>
+            <span class="span2"></span>
+          </div>
+      
+          <div class="button3">
+            <a href="{{ url_for('main.history') }}">
+              <button>Performance History</button>
+            </a>  
+            <span class="span1"></span>
+            <span class="span2"></span>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="services_container_item">
+        <img src="{{ url_for('static', filename='images/services/signal.webp') }}" alt="signal" />
+        <p class="services_container_item_title">Bot Development</p>
+        <p class="services_container_item_content">
+          Harness the power of automation with our cutting-edge trading bots. 
+          Designed by our team of traders, developers and engineers, our bots execute trades with precision, 
+          minimizing emotional decision-making, and maximizing market opportunities. 
+          Whether you need fully automated or semi-automated trading solutions, 
+          we develop bots tailored to your unique trading strategies.
+        </p>
+        <!-- BUTTON 3 -->
+        <div class="button3">
+          <!-- <a href="{{ url_for('main.bot_dev') }}"> -->
+            <a href="{{ url_for('main.contact') }}">
+            <button>Learn more</button>
+          </a>   
+          <span class="span1"></span>
+          <span class="span2"></span>
+        </div>
+        <!-- BUTTON 3 -->
+      </div>
+  
+      
+
+    </div>
+    <!-- SERVICES -->
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+  const introVideo = document.getElementById('introVideo');
+  const loopVideo = document.getElementById('loopVideo');
+
+  introVideo.addEventListener('ended', () => {
+    // Fade out intro video
+    introVideo.style.opacity = 0;
+
+    // Fade in loop video
+    loopVideo.style.opacity = 1;
+
+    // Start playing loop video
+    loopVideo.play();
+  });
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contact-us.css') }}"> 
+{% endblock %}
+
+{% block content %}
+
+<section class="contact_us_main">
+    <div class="container">
+      <div class="contact_us">
+        <h1>Get in Touch</h1>
+        <p>For the fastest response, join our thriving 
+        <a href="https://discord.gg/iucapital" target="_blank" style="font-weight: bold; color: #5865F2; text-decoration: underline;">Discord</a>
+         community!</p>
+        <p>Or send us a message below!</p>
+
+
+        <form class="form" method="POST" action="https://formsubmit.co/iucapitalconsult@gmail.com" id="contactForm">
+          <input type="text" placeholder="Name" name="name" required />
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="text" placeholder="Your Company" name="company" />
+          <input type="text" placeholder="How Can We Help?" name="requirement" />
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_autoresponse" value="Thank you for reaching out! We will be in contact ASAP">
+          <textarea rows="10" placeholder="Your Message" name="message" required></textarea>
+          <div class="button2" style="margin-top: 20px; background-color: transparent;">
+            <button id="submit" type="submit">SEND</button>
+            <span></span>
+          </div>
+        </form>
+        <div id="formMessage" style="margin-top: 20px;"></div>
+      </div>
+  
+      <div class="contact_card">
+        <div class="contact_card_img">
+          <img src="{{ url_for('static', filename='images/dotgraphics.webp') }}" alt="consultation" />          
+        </div>
+        <div class="contact_card_box">
+          <div class="contact_card_box_item">
+            <div class="title_span">
+              <span></span>
+              <p>Phone / Whatsapp</p>
+            </div>
+            <p>+1 863-286-6521</p>
+          </div>
+          <div class="contact_card_box_item">
+            <div class="title_span">
+              <span></span>
+              <p>Locations</p>
+            </div>
+          
+            <div class="address_block">
+              <strong>Orlando Office</strong>
+              <p>
+                255 S Orange Ave<br>
+                Suite 104<br>
+                Orlando, FL 32801
+              </p>
+            </div>
+          
+            <div class="address_block">
+              <strong>Lake Oswego Office</strong>
+              <p>
+                6016 Boones Ferry Rd<br>
+                Suite 200-203<br>
+                Lake Oswego, OR 97035
+              </p>
+            </div>
+          
+            <div class="address_block">
+              <strong>Portland Office</strong>
+              <p>
+                111 SW 5th Ave<br>
+                Suite 3150<br>
+                Portland, OR 97204
+              </p>
+            </div>
+          </div>
+          
+          
+          <div class="contact_card_box_item">
+            <div class="title_span">
+              <span></span>
+              <p>SOCIAL MEDIA</p>
+            </div>
+            <div class="footer1_social_logos">
+              <a href="https://discord.gg/iucapital" target="_blank"><i class="fa-brands fa-discord"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=61551454222998" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+              <a href="https://twitter.com/IU_Capital" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://www.instagram.com/iucapital/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/iu-capital-llc" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://www.youtube.com/@IUCapital" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      const form = event.target;
+      const formData = new FormData(form);
+      const loader = document.getElementById('loader');
+  
+      loader.style.display = 'block'; // Show the loader
+  
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        loader.style.display = 'none'; // Hide the loader
+        if (response.ok) {
+          document.getElementById('formMessage').innerHTML = '<p style="color: green;">Your message has been sent successfully!</p>';
+          form.reset(); // Reset the form fields
+        } else {
+          document.getElementById('formMessage').innerHTML = '<p style="color: red;">There was an error sending your message. Please try again later.</p>';
+        }
+      }).catch(error => {
+        loader.style.display = 'none'; // Hide the loader
+        document.getElementById('formMessage').innerHTML = '<p style="color: red;">There was an error sending your message. Please try again later.</p>';
+      });
+    });
+  </script>
+  
+  
+  <!-- CONTACT US -->
+  <!-- MAP -->
+  <div class="mapouter">
+    <div class="gmap_canvas">
+      <iframe
+        class="gmap_iframe"
+        width="100%"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=255 S Orange ave suite 104 Orlando, FL 32801&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+      ></iframe
+      ><a href="https://embed-googlemap.com">google maps embed</a>
+    </div>
+    <style>
+      .mapouter {
+        position: relative;
+        text-align: right;
+        max-width: 100%;
+        margin: auto;
+        width: 100%;
+        height: 550px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid white;
+      }
+      .gmap_canvas {
+        overflow: hidden;
+        background: none !important;
+        width: 100%;
+        height: 550px;
+      }
+      .gmap_iframe {
+        height: 550px !important;
+      }
+    </style>
+  </div>
+    
+{% endblock %}

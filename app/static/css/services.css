@@ -1,0 +1,109 @@
+@media screen and (max-width: 768px) {
+    .services_container_item_content {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+  
+  section.services {
+    padding: 75px 0;
+    background: #f3f3f3;
+    width: 95%;    
+    max-width: 95%;
+    margin: 101px auto 158px auto; 
+    box-sizing: border-box;
+  }
+  
+  .services_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;    
+    width: 100%;        
+  }
+  
+  .services_container_item {
+    width: calc(33.333% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+  }
+    
+  .services_container_item img {
+    width: 132px;
+    height: 99px;
+    object-fit: contain;
+    margin: 52px 0 17px;
+  }
+    
+  p.title {
+    text-align: center;
+    font-size: 20px;
+    color: #a88557;
+    font-weight: bold;
+  }
+  
+  p.subtitle {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+  }
+  h2.subtitle {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  
+  p.services_container_item_title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 0 24px;
+    height: 80px; 
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  p.services_container_item_content {
+    font-size: 18px;
+    height: 187px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+  }
+    
+  .button3 {
+    margin-top: auto;
+  }
+    
+  .button-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-top: auto;
+  }
+    
+  .services.container > button,
+  .services .container > button {
+    margin: auto;
+    display: block;
+    margin-top: 80px;
+  }
+    
+  @media screen and (max-width: 879px) {
+    .services_container {
+      flex-direction: column;
+    }
+    .services_container_item {
+      width: 100%;
+    }
+  }
+  

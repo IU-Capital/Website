@@ -1,0 +1,147 @@
+body {
+  margin: 0;  
+  font-family: 'Roboto Mono', monospace;
+  color: #F3F3F3
+}
+
+h1 {
+  color: #000000; 
+  font-weight: 600;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #000000; 
+  font-weight: 600;
+  text-align: center;  
+  margin-bottom: 20px;
+}
+
+.section-wrapper {
+  width: 85%;
+  margin: 0 auto 40px;
+}
+
+.card {
+  background-color: #3c434d;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Setup Guide specific styling */
+.card.setup-card {
+  background-color: #3c434d;  
+  padding: 20px 30px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card.setup-card p {
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  color: #f1f5f9;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+
+  margin-right: 1.5rem; 
+}
+
+/* Optional: Remove margin on last button to avoid extra space at the end */
+.btn:last-child {
+  margin-right: 0;
+}
+
+
+.btn-primary {
+  background-color: #facc15; 
+  color: #000000;  
+  border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color:  #a88a0f;  
+  outline: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2d333a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid  #2d333a;
+}
+
+th {
+  background-color: #2d333a;
+  color: #facc15;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tr:hover {
+  background-color: #334155;
+}
+
+.positive {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.negative {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+canvas {
+  width: 100%;
+  height: auto;  
+  display: block;
+  margin: auto;
+}
+
+.scroll-container {
+  max-height: 400px;  /* Adjust height as needed */
+  overflow-y: auto;
+  border-top: 1px solid #334155;
+}
+
+.scroll-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scroll-container th,
+.scroll-container td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #334155;
+}
+
+.scroll-container thead {
+  position: sticky;
+  top: 0;
+  background-color: #1e293b; /* match your card bg color */
+  z-index: 1;
+}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Premium Signal Bot - Setup{% endblock %}
+
+{% block styles %}  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/setup.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="products">
+  <div class="products-wrapper">
+    <div class="products-inner">
+
+      <!-- Intro & Description -->
+      <div class="product-item">
+        <h2 class="product-title">Welcome to the Premium Signal Bot Setup</h2>
+        <p>This guide will walk you through the essential steps to start using the Premium Signal Bot. Follow each section carefully to properly configure your MetaTrader 5 platform and broker account.</p>
+      </div>
+
+      <!-- Install MT5 -->
+      <div class="product-item">
+        <h2 class="product-title">Installing MetaTrader 5</h2>
+        <p><strong>Step 1:</strong> Download MetaTrader 5 from the <a href="https://www.metatrader5.com/en/download" target="_blank" rel="noopener" class="download-button">official website</a>.</p>
+        <p><strong>Step 2:</strong> Run the installer and complete the setup.</p>
+        <p><strong>Step 3:</strong> Launch MetaTrader 5 and log in or create a new trading account.</p>
+      </div>
+
+      <!-- Choosing a Broker -->
+      <div class="product-item">
+        <h2 class="product-title">Choosing a Broker</h2>
+        <p style="margin-bottom: 1rem;">We currently support select partnered brokers. To ensure optimal performance, please register with one of them below:</p>
+        <ul style="margin-top: 0;">
+          <li><a href="https://www.fpmarkets.com/?redir=stv&fpm-affiliate-utm-source=IB&fpm-affiliate-agt=61211" target="_blank" rel="noopener" class="download-button">FP Markets</a></li>
+        </ul>
+        <p style="margin-top: 1rem;">After registering, create either a demo or live trading account. Use the account number, password, and server credentials to log in to MetaTrader 5.</p>
+      </div>
+
+
+      <!-- Download Bot -->
+      <div class="product-item">
+        <h2 class="product-title">Download the IU Capital Premium Signal Bot</h2>
+        <a href="http://159.203.144.60/download" class="download-button">DOWNLOAD</a>
+      </div>
+
+      <!-- MT5 Configuration -->
+      <div class="product-item">
+        <h2 class="product-title">MetaTrader 5 Configuration</h2>
+        <p><strong>Step 1:</strong> In MetaTrader 5, go to <strong>Tools &gt; Options &gt; Expert Advisors</strong>.</p>
+        <p><strong>Step 2:</strong> Check <em>"Allow Algorithmic Trading"</em>.</p>
+        <p><strong>Step 3:</strong> Check <em>"Allow WebRequest for listed URL"</em>.</p>
+        <p><strong>Step 4:</strong> Add the following URL:</p>
+
+        <div class="url-copy-wrapper">
+          <div id="urlText" class="url-text">http://159.203.144.60/</div>
+          <button onclick="copyURL()" class="copy-button">Copy</button>
+        </div>
+
+        <p><strong>Step 5:</strong> Click OK to save changes.</p>
+      </div>
+
+      <!-- Attach EA to Chart -->
+      <div class="product-item">
+        <h2 class="product-title">Attach the Expert Advisor to a Chart</h2>
+        <p><strong>Step 1:</strong> Move the downloaded Expert Advisor to the <strong>MQL5/Experts</strong> directory in your MT5 installation.</p>
+        <p><strong>Step 2:</strong> Open any chart from the Market Watch panel.</p>
+        <p><strong>Step 3:</strong> Open the navigator and drag the Expert Advisor onto the chart. A configuration window will appear.</p>
+        <p><strong>Step 4:</strong> Under the <strong>Inputs</strong> tab, enter the email and password you used to register.</p>
+        <p><strong>Step 5:</strong> Set your risk percentage — the portion of your account balance to be risked <strong>per trade</strong>.</p>
+        <p><strong>Step 6:</strong> Click OK to activate the bot.</p>
+      </div>
+
+      <!-- Troubleshooting Card -->
+      <div class="product-item">
+        <h2 class="product-title">Troubleshooting</h2>
+        <p>If you experience any issues during the setup process, here are a few common solutions:</p>
+        <ul>
+          <li><strong>Bot Not Executing Trades:</strong> Double-check that algorithmic trading is enabled in MetaTrader 5 under <em>Tools &gt; Options &gt; Expert Advisors</em>.</li>
+          <li><strong>WebRequest Not Working:</strong> Ensure you have added the correct server URL <code>http://159.203.144.60/</code> to the allowed list under the Expert Advisors tab.</li>
+          <li><strong>Invalid Login:</strong> Make sure you entered the correct email and password in the bot’s Inputs tab when attaching it to the chart.</li>
+          <li>If you are sure you are entering the correct credentials, but it is failing authentication, ensure the address has been added to the web requests correctly. </li>
+          <li><strong>Bot is Disabled(greyed out):</strong> Make sure the AutoTrading button in MetaTrader 5 is turned ON (green).</li>
+          <li><strong>Still Stuck?</strong> Reach out to our support team through the <a class="download-button" href="https://discord.gg/iucapital">Discord</a> community.</li>
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

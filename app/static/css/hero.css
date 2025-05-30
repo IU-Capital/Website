@@ -1,0 +1,69 @@
+.hero {
+    position: relative;
+    width: 95%;
+    max-width: 95%;
+    height: 800px;
+    border-radius: 12px;
+    margin-top: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden; /* clips children, including video */
+  }
+  
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* also good */
+    border-radius: 12px; /* optional but consistent */
+    z-index: -1;
+  }
+  
+  .hero-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* change from contain to cover */
+    transform: translate(-50%, -50%);
+    border-radius: 12px; /* optional */
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+  }
+  
+  
+  /* First video fills container height */
+  #introVideo {
+    height: 100%;
+    max-width: 100%;
+    opacity: 1;
+    z-index: -1;
+  }
+  
+  /* Second video smaller size */
+  #loopVideo {
+    height: 100%;  /* smaller height */
+    max-width: 100%; /* max width smaller too */
+    opacity: 0;
+    z-index: -2;
+  }
+
+.hero-text {
+    text-align: center;   /* This centers all text inside */
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #222;
+}

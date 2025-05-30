@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">  
+{% endblock %}
+
+{% block content %}
+<section class="product_description">
+    <div class="container">
+      <h1>FAQ</h1>
+  <h2>Frequently Asked Questions (FAQ) for Day Trading:</h2>
+
+  <h3>1. Who is IU Capital?</h3>
+  <p>IU Capital is a team of market analysts, day traders, and developers dedicated to
+    creating profitable algorithms for trading financial markets</p>
+
+  <h3>2. What does IU Capital offer?</h3>
+  <p>In addition to offering investment opportunities in our profitable trading algorithms, IU
+    Capital provides a range of services including trading consultations for ongoing traders
+    and a signal service to help you earn a consistent monthly income.</p>
+
+  <h3>3. Can everybody work with IU Capital?</h3>
+  <p>Absolutely! Whether you’re looking to learn trading or simply want to turn a profit,
+    everyone is welcome to join and benefit from our expertise.</p>
+
+  <h3>4. What if the money invested is lost?</h3>
+  <p>While there is always a risk of loss in financial markets, at IU Capital, we use the same
+    algorithms to trade both our own money and our clients' funds. When you lose, we lose.
+    Our entire team is dedicated to minimizing this risk and ensuring profitable outcomes.</p>
+
+  <h3>5. What broker should I use for trading?</h3>
+  <p>For the best experience with IU Capital, we recommend using the same broker we trust:
+    <a href="https://www.fpmarkets.com/?redir=stv&fpm-affiliate-utm-source=IB&fpm-affiliate-agt=61211">FP Markets</a> This ensures seamless integration and optimal performance of our trading
+    algorithms.</p>
+
+  <p style="font-size: smaller;">These FAQs provide general information about day trading. Remember that trading involves risks, and it's essential to conduct thorough research and seek professional advice before engaging in day trading activities.</p>
+    </div>
+  </section>
+{% endblock %}

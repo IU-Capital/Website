@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}"> 
+{% endblock %}
+
+{% block content %}
+    <!-- ABOUT TOP SECTION -->
+    <section class="about_us_main">
+        <div class="container">
+          <div class="about_main_content">
+            <div class="title_span">
+              <span></span>
+              <p>ABOUT</p>
+            </div>
+            <h1>IU CAPITAL</h1>
+            <div class="about_main_description">
+              <p>
+                IU Capital is a reputable financial services firm renowned for its
+                expertise in investment strategies and wealth management.
+                Established with a commitment to providing innovative solutions
+                and superior client service, IU Capital has garnered a strong
+                reputation within the industry. Specializing in a range of
+                financial products and services, including trading signals and
+                investment opportunities, IU Capital prides itself on its
+                dedication to helping clients achieve their financial goals. With
+                a team of experienced professionals and a client-centric approach,
+                IU Capital continues to be a trusted partner for individuals and
+                institutions seeking expert financial guidance.
+              </p>                    
+            </div>
+          </div>
+          <div class="about_main_photo">
+            <video autoplay muted loop playsinline>
+                <source src="{{ url_for('static', filename='images/hero_banner_2.mp4') }}" type="video/mp4">      
+              </video>
+          </div>
+        </div>
+      </section>
+      <!-- ABOUT TOP SECTION -->
+      <!-- ABOUT AUTHOR -->
+      <div class="about_author">
+        <div class="container">
+          <div class="about_author_titles">
+            <div class="title_span">
+              <span></span>
+              <p>ABOUT THE FOUNDER</p>
+            </div>
+            <h1>THE STORY OF MIKE EMMONS</h1>            
+            <div class="about_author_titles_image">                
+              <img src="{{ url_for('static', filename='images/our-team/mike.webp') }}" alt="mike" />
+            </div>
+          </div>
+  
+          <div class="about_author_content">
+            <p>
+              Hey there, I’m Mike Emmons. Not too long ago, I was stuck in the
+              daily grind, punching in at a warehouse and spending hours on end in
+              a call center. Let me tell you, it wasn’t easy. Every day felt like
+              a battle against monotony, and I knew deep down that I was meant for
+              something more.
+            </p>
+  
+            <p>
+              So, I took a leap of faith. I decided to break free from the 9-5
+              routine and chase after independence. Trading caught my eye, and I
+              figured, why not give it a shot? It was a bit daunting at first,
+              diving into the world of finance without any formal background. But
+              hey, you gotta start somewhere, right?
+            </p>
+  
+            <p>
+              The journey wasn’t smooth sailing, that’s for sure. I faced my fair
+              share of setbacks and doubts along the way. Learning the ropes of
+              trading was no walk in the park, let me tell you. But I was
+              determined to make it work. I poured my heart and soul into
+              mastering the craft, soaking up every bit of knowledge and
+              experience I could get my hands on.
+            </p>
+            <p>
+              Fast forward to today, and here I am, with over 12 years of trading
+              experience under my belt. It’s been quite the ride, let me tell you.
+              But the best part? I get to pay it forward. I’m passionate about
+              helping others navigate their own trading journeys, sharing the
+              wisdom and insights I’ve gained along the way.
+            </p>
+            <p>
+              So, if you’re feeling stuck in the daily grind like I was, know that
+              there’s hope. With a bit of courage, determination, and a whole lot
+              of grit, you can break free and chase after your dreams. Trust me,
+              I’ve been there. And if I can do it, so can you.
+            </p>
+          </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Consultations{% endblock %}
+{% block content %}
+
+{% block styles %}  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}"> 
+{% endblock %}
+
+<script src="{{ url_for('static', filename='js/consultations.js') }}"></script>
+    <!-- BANNER SECTION -->
+    <section class="banner">
+        <div class="banner_content">
+          <div class="container">
+            <div class="product_content">
+              <div class="product_content"><img src="" alt="" /></div>
+              <h1>TRADING CONSULTATIONS</h1>
+              <p class="product_banner_description">
+                Let your Trading journey begin with one of our consulting packages - this
+                is where trading novices become confident strategists !!
+              </p>
+              <div class="learn_more_container">
+                <div class="down_arrow">
+                  <a href="#More-About-The-Product"
+                    ><i class="fa-solid fa-angle-down arrow"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="product_checkout">
+              <p class="product_checkout_title">Book a Session</p>
+              <p class="product_checkout_subtitle">
+                Trading consultations may be broken into mulitple shorter consults.
+              </p>
+               <select id="product_checkout_select"  autocomplete="off">
+                <!-- JAVASCRIPT SELECTED -->
+              </select>
+              <div class="product_checkout_amount">
+                <div class="discount"><p></p></div>
+                <div class="total"><p></p></div>
+              </div>
+              <div class="checkout_buttons">
+                <!-- BUTTON 1 -->
+                <div class="button1">
+                  <button onclick="stripe_button_link()">PAY WITH STRIPE</button>
+                  <span></span>
+                </div>
+                <!-- BUTTON 1 -->
+              </div>
+            </div>
+          </div>
+        </div>        
+        <img class="banner_background" src="{{ url_for('static', filename='images/signals_image.png') }}" alt="Signals Background" />
+      </section>
+      <span id="More-About-The-Product"></span>
+      <section class="product_description">
+        <div class="container">
+          <h1>About the service</h1>
+  
+          <p>
+            Discover the essentials of day trading with our beginner-friendly
+            package. Perfect for those new to trading, this comprehensive offering
+            covers the basics: from getting started and selecting the right
+            platforms and brokers, to avoiding scams and finding reliable
+            resources. Gain confidence and knowledge as you embark on your day
+            trading journey with our expert guidance and free study materials.
+            Start your path to successful day trading today!
+          </p>
+          <h2>What results can I expect?</h2>
+          <ul>
+            <li>
+              <p>
+                Understanding Basics: Clients will grasp fundamental concepts
+                crucial for day trading, such as market mechanics, order types,
+                and risk management.
+              </p>
+            </li>
+            <li>
+              <p>
+                Building Strategies: Learn to develop basic trading strategies
+                suited for beginners, focusing on simplicity and low-risk setups.
+              </p>
+            </li>
+            <li>
+              <p>
+                Practice Sessions: Engage in simulated trading sessions to apply
+                newly acquired knowledge and gain confidence without risking real
+                capital.
+              </p>
+            </li>
+            <li>
+              <p>
+                Support & Guidance: Receive ongoing support and guidance from
+                experienced mentors to navigate initial challenges and queries.
+              </p>
+            </li>
+            <li>
+              <p>
+                Goal Setting: Establish realistic trading goals and milestones
+                tailored to the individual's starting point and aspirations.
+              </p>
+            </li>
+          </ul>
+  
+          <div class="product_description_image">
+             
+            <img src="{{ url_for('static', filename='images/product_description_image.webp') }}" alt="" />
+          </div>
+        </div>
+      </section>
+    
+      <script>
+        
+       
+    
+    
+      </script>
+
+
+{% endblock %}

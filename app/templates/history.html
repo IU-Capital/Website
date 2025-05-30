@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Premium Signal Bot - Performance History{% endblock %}
+
+{% block styles %}  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}"> 
+  
+
+{% endblock %}
+
+{% block content %}
+
+<section>
+
+  <h1>IU Capital Premium Signal Bot - Performance History</h1>
+
+  <div class="section-wrapper">    
+    <div class="card setup-card">
+      <p>To setup the Premium Signal Bot, Please follow the link below to log in.</p>
+      <a href="{{ url_for('main.setup') }}" class="btn btn-primary">SETUP</a>
+      <a href="{{ url_for('main.signals') }}" class="btn btn-primary">BUY NOW</a>
+    </div>
+  </div>
+  
+  <div class="section-wrapper">
+    <h2>Account Info</h2>
+    <div class="card">
+      <table id="accountTable"></table>
+    </div>
+  </div>
+
+  <div class="section-wrapper">    
+    <div class="card">
+      <canvas id="equityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="section-wrapper">    
+    <div class="card">
+      <div class="scroll-container">      
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Symbol</th>
+              <th>Type</th>
+              <th>Volume</th>
+              <th>Profit</th>
+              <!-- <th>Comment</th> -->
+            </tr>
+          </thead>
+          <tbody id="dealTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+
+{% endblock %}
+
+
