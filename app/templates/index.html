@@ -20,49 +20,81 @@
 
 <!-- ABOUT US -->
 <section class="about">
-  <div class="about_content container">
-    <div class="title_span">
-      <span></span>
-      <p>ABOUT US</p>
+  <div class="about_content container">        
+    <h1 class="about_title">Elevate Your Trading Experience</h1>
+    <div class="cards_wrapper">
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/contact-bg.webp') }}" alt="Algorithm Icon" />
+        <div class="card_content">
+          <h2>About</h2>
+          <p class="about_sub">
+            At IU Capital, we specialize in algorithmic trading, combining expert strategies, 
+            real-time market data, and deep automation capabilities.
+            Whether you're just starting or refining advanced systems, 
+            we provide the support and tools to elevate your performance.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/office.jpg') }}" alt="Why Choose IU Capital Icon" />
+        <div class="card_content">
+          <h2>Why Choose IU Capital?</h2>
+          <p>
+            Our personalized approach means you get more than just signals—you get tailored insights based
+            on your trading style and goals. We believe trading success comes from a balance of strategy, 
+            discipline, and constant refinement.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/office1.jpeg') }}" alt="What We Offer Icon" />
+        <div class="card_content">
+          <h2>What We Offer</h2>
+          <ul class="services_list">
+            <li><strong>Algo Trading Strategies</strong> – Designed by professionals and optimized using backtested data.</li>
+            <li><strong>Real-Time Market Signals</strong> – Get alerts as conditions change, across forex, indices, gold, and crypto.</li>
+            <li><strong>Custom Strategy Development</strong> – Build from scratch or refine your current system with expert guidance.</li>
+            <li><strong>1-on-1 Mentorship</strong> – Learn directly from seasoned traders and developers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/signals_image.png') }}" alt="Technology Meets Experience Icon" />
+        <div class="card_content">
+          <h2>Technology Meets Experience</h2>
+          <p>
+            Our proprietary algorithms scan markets 24/7, while human expertise adds the context machines can’t. 
+            This hybrid model gives you responsive, reliable trading support that evolves with the markets.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/office3.jpeg') }}" alt="Community Icon" />
+        <div class="card_content">
+          <h2>Join the IU Capital Community</h2>
+          <p>
+            Connect with a growing network of traders, receive regular briefings, 
+            and get access to our exclusive tools and resources.
+          </p>
+        </div>
+      </div>
+
     </div>
-    <h1 class="about_title">IU Capital: Elevate Your Trading Experience</h1>
-
-    <p class="about_sub">
-      At IU Capital, we specialize in algorithmic trading, combining expert strategies, real-time market data, and deep automation capabilities. Whether you're just starting or refining advanced systems, we provide the support and tools to elevate your performance.
-    </p>
-
-    <h2>Why Choose IU Capital?</h2>
-    <p>
-      Our personalized approach means you get more than just signals—you get tailored insights based on your trading style and goals. We believe trading success comes from a balance of strategy, discipline, and constant refinement.
-    </p>
-
-    <h2>What We Offer</h2>
-    <ul class="services_list">
-      <li><strong>Algo Trading Strategies</strong> – Designed by professionals and optimized using backtested data.</li>
-      <li><strong>Real-Time Market Signals</strong> – Get alerts as conditions change, across forex, indices, gold, and crypto.</li>
-      <li><strong>Custom Strategy Development</strong> – Build from scratch or refine your current system with expert guidance.</li>
-      <li><strong>1-on-1 Mentorship</strong> – Learn directly from seasoned traders and developers.</li>
-    </ul>
-
-    <h2>Technology Meets Experience</h2>
-    <p>
-      Our proprietary algorithms scan markets 24/7, while human expertise adds the context machines can’t. This hybrid model gives you responsive, reliable trading support that evolves with the markets.
-    </p>
-
-    <h2>Join the IU Capital Community</h2>
-    <p>
-      Connect with a growing network of traders, receive regular briefings, and get access to our exclusive tools and resources.
-    </p>
 
     <!-- BUTTON -->
-    <div class="button3">
+    <div class="about_button">
       <a href="{{ url_for('main.about') }}">
-        <button>About Us</button>
+        <button>Learn More</button>
       </a>               
       <span class="span1"></span>
       <span class="span2"></span>
     </div>
     <!-- BUTTON -->
+
   </div>
 </section>
 

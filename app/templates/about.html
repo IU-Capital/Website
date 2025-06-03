@@ -2,97 +2,176 @@
 {% block title %}About{% endblock %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}"> 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}"> 
 {% endblock %}
 
 {% block content %}
-    <!-- ABOUT TOP SECTION -->
-    <section class="about_us_main">
-        <div class="container">
-          <div class="about_main_content">
-            <div class="title_span">
-              <span></span>
-              <p>ABOUT</p>
-            </div>
-            <h1>IU CAPITAL</h1>
-            <div class="about_main_description">
-              <p>
-                IU Capital is a reputable financial services firm renowned for its
-                expertise in investment strategies and wealth management.
-                Established with a commitment to providing innovative solutions
-                and superior client service, IU Capital has garnered a strong
-                reputation within the industry. Specializing in a range of
-                financial products and services, including trading signals and
-                investment opportunities, IU Capital prides itself on its
-                dedication to helping clients achieve their financial goals. With
-                a team of experienced professionals and a client-centric approach,
-                IU Capital continues to be a trusted partner for individuals and
-                institutions seeking expert financial guidance.
-              </p>                    
-            </div>
-          </div>
-          <div class="about_main_photo">
-            <video autoplay muted loop playsinline>
-                <source src="{{ url_for('static', filename='images/hero_banner_2.mp4') }}" type="video/mp4">      
-              </video>
-          </div>
-        </div>
-      </section>
-      <!-- ABOUT TOP SECTION -->
-      <!-- ABOUT AUTHOR -->
-      <div class="about_author">
-        <div class="container">
-          <div class="about_author_titles">
-            <div class="title_span">
-              <span></span>
-              <p>ABOUT THE FOUNDER</p>
-            </div>
-            <h1>THE STORY OF MIKE EMMONS</h1>            
-            <div class="about_author_titles_image">                
-              <img src="{{ url_for('static', filename='images/our-team/mike.webp') }}" alt="mike" />
-            </div>
-          </div>
-  
-          <div class="about_author_content">
-            <p>
-              Hey there, I’m Mike Emmons. Not too long ago, I was stuck in the
-              daily grind, punching in at a warehouse and spending hours on end in
-              a call center. Let me tell you, it wasn’t easy. Every day felt like
-              a battle against monotony, and I knew deep down that I was meant for
-              something more.
-            </p>
-  
-            <p>
-              So, I took a leap of faith. I decided to break free from the 9-5
-              routine and chase after independence. Trading caught my eye, and I
-              figured, why not give it a shot? It was a bit daunting at first,
-              diving into the world of finance without any formal background. But
-              hey, you gotta start somewhere, right?
-            </p>
-  
-            <p>
-              The journey wasn’t smooth sailing, that’s for sure. I faced my fair
-              share of setbacks and doubts along the way. Learning the ropes of
-              trading was no walk in the park, let me tell you. But I was
-              determined to make it work. I poured my heart and soul into
-              mastering the craft, soaking up every bit of knowledge and
-              experience I could get my hands on.
-            </p>
-            <p>
-              Fast forward to today, and here I am, with over 12 years of trading
-              experience under my belt. It’s been quite the ride, let me tell you.
-              But the best part? I get to pay it forward. I’m passionate about
-              helping others navigate their own trading journeys, sharing the
-              wisdom and insights I’ve gained along the way.
-            </p>
-            <p>
-              So, if you’re feeling stuck in the daily grind like I was, know that
-              there’s hope. With a bit of courage, determination, and a whole lot
-              of grit, you can break free and chase after your dreams. Trust me,
-              I’ve been there. And if I can do it, so can you.
-            </p>
-          </div>
+<!-- ABOUT TOP SECTION -->
+<section class="about">
+  <div class="about_content container">    
+    <h1 class="about_title">About IU Capital</h1>
+
+    <div class="cards_wrapper">
+
+      <!-- About Company Card -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/product_description_image.webp') }}" alt="IU Capital Office" />
+        <div class="card_content">          
+          <p>
+            IU Capital is a trusted financial services firm known for its
+            expertise in investment strategies and wealth management. 
+          </p>
+          <p>
+            With a strong reputation for providing innovative solutions and
+            superior client service, we offer a broad range of financial
+            products, including trading signals and investment opportunities.
+          </p>
+          <p>
+            Our team of experienced professionals is committed to helping
+            clients achieve their financial goals through a personalized,
+            client-first approach. IU Capital is proud to be a trusted partner
+            for both individuals and institutions seeking expert financial guidance.
+          </p>
         </div>
       </div>
+      <h2 class="about_title">MEET THE TEAM</h2>
+
+      
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/our-team/mike.webp') }}" alt="name" />
+        <div class="card_content">
+          <h2 class="team_name">Mike Emmons - Co-Founder</h2>        
+          <p class="team_bio">
+            bio
+          </p>
+          <div class="team_experience">
+            <h4>Experience</h4>
+            <ul>
+              <li>experience</li>
+            </ul>
+          </div>
+  
+          <div class="team_skills">
+            <h4>Roles at IU Capital</h4>
+            <ul>
+              <li>roles</li>
+  
+            </ul>
+          </div>
+        </div>
+      </div>   
+
+    <!-- Team Cards -->
+    
+    
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/our-team/simon.jpg') }}" alt="name" />
+      <div class="card_content">
+        <h2 class="team_name">Simon Huber - Co-Founder</h2>        
+        <p class="team_bio">
+          bio
+        </p>
+        <div class="team_experience">
+          <h4>Experience</h4>
+          <ul>
+            <li>experience</li>
+          </ul>
+        </div>
+
+        <div class="team_skills">
+          <h4>Roles at IU Capital</h4>
+          <ul>
+            <li>roles</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/our-team/JohnNew.jpeg') }}" alt="John Shanahan" />
+      <div class="card_content">
+        <h2 class="team_name">John Shanahan – Software Engineer</h2>
+    
+        <p class="team_bio">
+          John leads development across IU Capital’s infrastructure — building trading algorithms, backend systems,
+          and cloud-hosted dashboards.
+        </p>
+    
+        <div class="team_experience">
+          <h4>Experience</h4>
+          <ul>
+            <li>Designing automated trading strategies (MQL5, Python)</li>
+            <li>Developing backend APIs and analytics tools</li>
+            <li>Deploying full-stack platforms on cloud infrastructure</li>
+          </ul>
+        </div>
+    
+        <div class="team_skills">
+          <h4>Roles at IU Capital</h4>
+          <ul>
+            <li>Develop trading algorithms and bots</li>
+            <li>Maintain backend systems and APIs</li>
+            <li>Manage cloud deployments and infrastructure</li>
+            <li>Support full-stack application development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/our-team/adam.jpg') }}" alt="name" />
+      <div class="card_content">
+        <h2 class="team_name">Adam Szafranski - Finance Manager</h2>        
+        <p class="team_bio">
+          bio
+        </p>
+        <div class="team_experience">
+          <h4>Experience</h4>
+          <ul>
+            <li>experience</li>
+          </ul>
+        </div>
+
+        <div class="team_skills">
+          <h4>Roles at IU Capital</h4>
+          <ul>
+            <li>roles</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    
+<!-- 
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/our-team/image.jpg') }}" alt="name" />
+      <div class="card_content">
+        <h2 class="team_name">name - position</h2>        
+        <p class="team_bio">
+          bio
+        </p>
+        <div class="team_experience">
+          <h4>Experience</h4>
+          <ul>
+            <li>experience</li>
+          </ul>
+        </div>
+
+        <div class="team_skills">
+          <h4>Key Skills</h4>
+          <ul>
+            <li>skill</li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+
+
+  </div>
+</section>
+
 {% endblock %}

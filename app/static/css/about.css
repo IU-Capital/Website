@@ -1,141 +1,227 @@
 .about {
-    /* your existing styles */
-    position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)),
-                url('/static/images/office.jpeg') center/cover no-repeat;
-    color: #fefefe; /* brighter near-white */
-    padding: 5rem 0.5rem;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 36px;
-    margin-bottom: 36px;
-    width: 95%;
-    max-width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .about_content {
-    max-width: 850px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-  
-  .container .title {
-    color: #333333; /* dark gray, or choose another color */
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .container .subtitle {
-    color: #131212; /* medium gray for subtitle */
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-  
-  h1.about_title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    line-height: 1.3;
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* subtle shadow */
-  }
-  
-  p.about_sub {
-    font-size: 1.125rem;
-    color: #f0f0f0;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-  }
-  
-  
-  .title_span {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.5rem;
-  }
-  
-  .title_span span {
-    width: 40px;
-    height: 2px;
-    background-color: #fff;
-  }
-  
-  .title_span p {
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: #fff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-  }
-  
-  .about_content h2 {
-    font-size: 1.75rem;
-    color: #e5e0e0;
-    margin-bottom: 0.75rem;
-  }
-  
- 
+  position: relative;
+  color: var(--color-light);
+  padding: 5rem 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 36px auto;
+}
 
-  .services_list {
-    color: #e8e8e8;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+.about_content {
+  max-width: 98%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.title_span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.title_span span {
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-line);
+}
+
+.title_span p {
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--color-dark);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+h1.about_title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-left: 30px;
+  padding-top: 2rem;
+  line-height: 1.4;
+  color: var(--color-gold);
+  margin-bottom: 2rem;
+}
+
+h2.about_title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-left: 30px;
+  padding-top: 2rem;
+  line-height: 1.4;
+  color: var(--color-gold);
+  margin-bottom: 2rem;
+}
+
+.cards_wrapper {
+  display: grid;
+  grid-template-columns: 1fr;      /* single column to force one card per row */
+  gap: 2rem;                      /* space between cards */
+  width: 95%;                    /* almost full width */
+  max-width: 95%;              /* optional max width for readability */
+  margin: 0 auto;                /* center horizontally */
+  align-items: stretch;
+}
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  padding: 2rem 2rem 2rem 14rem; /* reduced from 18rem to 14rem */
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(255, 215, 0, 0.15);
+  color: var(--color-darker);
+  min-height: 280px;
+  overflow: visible;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 14px 28px rgba(255, 215, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 215, 0, 0.4);
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+.card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+  transition: transform 0.3s ease;
+  z-index: 0;
+  
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+
+/* The content should be on top */
+.card_content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding-left: 12rem;
+  line-height: 1.8;            /* improved line spacing */
+  font-size: 1.8rem;           /* slightly smaller for better balance */
+  color: var(--color-darker);
+}
+
+.card_content p {
+  margin-bottom: 1.5rem;       /* space between paragraphs */
+}
+
+
+/* Headings */
+.card h2 {
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Text and list */
+.card p,
+.card ul {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--color-dark);
+}
+
+/* List styling */
+.services_list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.6rem;
+}
+
+.services_list li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.2rem;
+  position: relative;
+  font-weight: 500;
+}
+
+/* Custom bullet with gold dot */
+.services_list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-size: 1.3rem;
+  top: 0;
+  line-height: 1;
+}
+
+.about_button {
+  display: inline-block;
+  background: var(--color-gold); /* gold-ish, like your card titles */
+  color: #222222;                     /* dark text for contrast */
+  padding: 0.85rem 2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(230, 194, 0, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  user-select: none;
+}
+
+.about_button:hover {
+  background: var(--color-gold-hover);
+  box-shadow: 0 6px 15px rgba(230, 194, 0, 0.8);
+}
+
+.about_button:active {
+  background: rgba(200, 170, 0, 1);
+  box-shadow: 0 2px 8px rgba(200, 170, 0, 0.7);
+  transform: translateY(2px);
+}
+
+
+@media screen and (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 1.5rem;
   }
-  
-  .services_list li {
-    margin-bottom: 0.5rem;
+  .card img {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1.2rem;
+    transform: none !important;
+    filter: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   }
-  
-  .button3 button {
-    color: #222; /* darker text on buttons for better contrast */
-    background-color: #fff; /* lighter background */
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  .card_content {
+    justify-content: flex-start;
   }
-  
-  .button3 button:hover {
-    background: #e6c200;
-    color: #000;
+  .card h2 {
+    font-size: 1.6rem;
   }
-  
-  /* Responsive layout */
-  
-  @media screen and (max-width: 1200px) {
-    .about {
-      padding: 4rem 1.5rem;
-    }
-    h1.about_title {
-      font-size: 2.25rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-    }
+  .card p,
+  .card ul {
+    font-size: 1.05rem;
   }
-  
-  @media screen and (max-width: 768px) {
-    .about {
-      padding: 3rem 1rem;
-    }
-    h1.about_title {
-      font-size: 2rem;
-    }
-    h2 {
-      font-size: 1.25rem;
-    }
-  }
-  
-  @media screen and (max-width: 500px) {
-    h1.about_title {
-      font-size: 1.75rem;
-    }
-  }
-  
+}

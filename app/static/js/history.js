@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     let equityChart;
-    const initialBalance = 100000;
+    const initialBalance = 1000;
 
     async function fetchHistory() {
-        const response = await fetch('https://iucapitalfund.com/api/history');
+        const response = await fetch('https://iucapitalfund.com/api/get_history');
         const data = await response.json();
 
         const accountTable = document.getElementById('accountTable');
@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dealTable.innerHTML = "";
 
         const sortedDeals = data.deals
-            .filter(deal => deal.symbol && deal.symbol !== "BTCUSD" && !isNaN(deal.profit))
-            .sort((a, b) => new Date(a.time) - new Date(b.time));
+        .filter(deal => deal.symbol && deal.symbol !== "BTCUSD" && deal.symbol !== "US30" && !isNaN(deal.profit))
+        .sort((a, b) => new Date(a.time) - new Date(b.time));
+    
 
         const balance = parseFloat(data.account.balance || initialBalance);
         let cumulative = initialBalance;

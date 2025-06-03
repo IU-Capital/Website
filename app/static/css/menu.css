@@ -1,17 +1,19 @@
-menu .container{
+menu .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
     z-index: 999;
 }
-menu{
-    background-color: #F3F3F3;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+menu {
+    background-color: var(--color-light); 
+    box-shadow: var(--color-shadow-dark) 0px 8px 24px; /* using shadow variable */
     position: sticky;
     top: 0;
     z-index: 999999;
 }
+
 menu .logo {
     display: flex;
     align-items: center;
@@ -23,27 +25,28 @@ menu .logo img {
     width: 35px;
     height: 35px;
 }
+
 menu .logo p.logo_text {
     font-size: 22px;
     font-weight: 600;
+    color: var(--color-dark); /* dark text for logo */
 }
 
-
-
- nav {
+nav {
     display: flex;
     align-items: center;
     gap: 44px;
     font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
+    color: var(--color-dark); /* consistent dark nav text */
 }
 
 .mobile_menu {
     display: none;
 }
 
-nav.mobile{
+nav.mobile {
     position: fixed;
     top: 0;
     left: 100%;
@@ -51,39 +54,34 @@ nav.mobile{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #F3F3F3;
+    background-color: var(--color-bg-light); /* consistent background */
     height: 100vh;
     width: 100%;
     transition: all 0.5s ease;
     overflow: hidden;
 }
-nav.mobile.menu_toggle{
 
+nav.mobile.menu_toggle {
     left: 0;
 }
 
 @media screen and (max-width: 1271px) {
-
-    menu nav.full_screen{
-     display: none;
+    menu nav.full_screen {
+        display: none;
     }
-    menu .container{
-    
+    menu .container {
         justify-content: space-between;
-        
+        padding: 10px;
     }
-    menu .mobile_menu{
+    menu .mobile_menu {
         display: block;
         cursor: pointer;
         font-size: 30px;
-        display: absolute;
+        position: absolute; /* fixed from display:absolute */
     }
-    menu .container{
-        padding: 10px;
-    }
-    menu .logo  {
+    menu .logo {
         justify-content: center;
         align-items: center;
         width: 100%;
     }
- }
+}

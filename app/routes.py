@@ -1,8 +1,11 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request, flash
+from flask import Blueprint, render_template, session, redirect, url_for, request, flash, jsonify
 from functools import wraps
 import requests
 import base64
+
 main = Blueprint('main', __name__)
+
+TCSERVER1 = "http://10.108.0.2:5000/"
 
 def login_required(f):
     @wraps(f)
@@ -13,24 +16,76 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@main.route('/api/history')
+#History
+
+@main.route('/api/history', methods=['POST'])
 def proxy_history():
-    resp = requests.get("http://159.203.144.60/get_history")
-    return resp.json()
+    try:
+        # Forward the data to the internal server (your backend)
+        data = request.form
+        resp = requests.post("http://10.108.0.2:5000/update_history", data=data)
+        return (resp.content, resp.status_code, resp.headers.items())
+    except Exception as e:
+        return jsonify({"error": f"Failed to connect to update server: {str(e)}"}), 500
+
+@main.route('/api/get_history', methods=['GET'])
+def fetch_history():
+    try:
+        resp = requests.get("http://10.108.0.2:5000/get_history")
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+#Users
 
 @main.route('/api/register', methods=['POST'])
 def proxy_register():
     try:
         data = request.get_json()
-        resp = requests.post("http://159.203.144.60/register", json=data)
+        resp = requests.post("http://10.108.0.2:5000/register", json=data)
         return (resp.text, resp.status_code, resp.headers.items())
     except Exception as e:
         return {"error": f"Failed to connect to registration server: {str(e)}"}, 500
     
 @main.route('/api/login')
 def proxy_login():
-    resp = requests.get("http://159.203.144.60/login")
+    resp = requests.get("http://10.108.0.2:5000/login")
     return resp.json()
+
+#Expert Advisor
+
+@main.route('/authenticate', methods=['POST'])
+def authenticate():
+    try:
+        headers = {
+            'X-EMAIL-ADDRESS': request.headers.get('X-EMAIL-ADDRESS'),
+            'X-PASSWORD': request.headers.get('X-PASSWORD')
+        }
+        resp = requests.post("http://10.108.0.2:5000/authenticate", headers=headers, json={})
+        return (resp.text, resp.status_code, resp.headers.items())
+    except Exception as e:
+        return jsonify({"error": f"Failed to connect to auth server: {str(e)}"}), 500
+
+@main.route('/update', methods=['POST'])
+def update_direct():
+    try:
+        # Forward the raw form data
+        data = request.form
+        resp = requests.post("http://10.108.0.2:5000/update", data=data)
+        return (resp.text, resp.status_code, resp.headers.items())
+    except Exception as e:
+        return jsonify({"error": f"Failed to connect to update server: {str(e)}"}), 500
+
+
+@main.route('/signal', methods=['GET'])
+def signal_direct():
+    try:
+        resp = requests.get("http://10.108.0.2:5000/signal")
+        return (resp.text, resp.status_code, resp.headers.items())
+    except Exception as e:
+        return jsonify({"error": f"Failed to connect to signal server: {str(e)}"}), 500
+
 
 
 @main.route('/')
@@ -103,7 +158,7 @@ def login():
         }
 
         try:
-            auth_response = requests.post('http://159.203.144.60/login', headers=headers)           
+            auth_response = requests.post('http://10.108.0.2:5000/login', headers=headers)           
 
             if auth_response.status_code == 200:
                 session['user_email'] = email
