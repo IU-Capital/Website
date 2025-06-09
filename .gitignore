@@ -2,5 +2,5 @@ __pycache__/
 venv/
 app/__pycache__/
 app/venv/
-app/static/images
+*.mp4
 .env
