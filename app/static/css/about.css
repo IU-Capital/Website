@@ -1,18 +1,15 @@
 .about {
   position: relative;
   color: var(--color-light);
-  padding: 5rem 1rem;
   border-radius: 12px;
-  overflow: hidden;
-  margin: 36px auto;
+  overflow: hidden;  
 }
 
 .about_content {
-  max-width: 98%;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -40,7 +37,6 @@
 h1.about_title {
   font-size: 2.5rem;
   font-weight: bold;
-  margin-left: 30px;
   padding-top: 2rem;
   line-height: 1.4;
   color: var(--color-gold);
@@ -50,7 +46,6 @@ h1.about_title {
 h2.about_title {
   font-size: 2.5rem;
   font-weight: bold;
-  margin-left: 30px;
   padding-top: 2rem;
   line-height: 1.4;
   color: var(--color-gold);
@@ -83,12 +78,12 @@ h2.about_title {
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow:
+  transform: translateY(-12px);
+  /* box-shadow:
     0 14px 28px rgba(255, 215, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 215, 0, 0.4);
-  outline: 2px solid var(--color-gold);
-  outline-offset: 4px;
+    inset 0 0 0 1px rgba(255, 215, 0, 0.4); */
+  /* outline: 2px solid var(--color-gold);
+  outline-offset: 4px; */
 }
 
 .card img {
@@ -161,7 +156,6 @@ h2.about_title {
   font-weight: 500;
 }
 
-/* Custom bullet with gold dot */
 .services_list li::before {
   content: "•";
   position: absolute;
@@ -173,20 +167,35 @@ h2.about_title {
 }
 
 .about_button {
-  display: inline-block;
-  background: var(--color-gold); /* gold-ish, like your card titles */
-  color: #222222;                     /* dark text for contrast */
-  padding: 0.85rem 2rem;
+  display: block;
+  margin: 2rem auto; 
+  background: var(--color-gold);
+  color: #222222;
+  max-width: 90%;
+  padding: 1.25rem 3rem;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.25rem; 
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(230, 194, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(230, 194, 0, 0.6);
   transition: background 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   user-select: none;
 }
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-link:hover .card {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
 
 .about_button:hover {
   background: var(--color-gold-hover);

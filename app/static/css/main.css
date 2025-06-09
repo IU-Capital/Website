@@ -244,6 +244,16 @@ button {
   color: var(--color-gold);
 }
 
+h2.title {
+  font-weight: bold;
+  color: var(--color-gold);
+  font-size: 2rem;       
+  text-align: center;    
+  margin-bottom: 2rem;   
+  text-transform: uppercase;
+}
+
+
 /* Loader */
 .loader {
   position: fixed;

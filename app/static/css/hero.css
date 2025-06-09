@@ -38,7 +38,7 @@
   /* First video fills container height */
   #introVideo {
     height: 100%;
-    max-width: 100%;
+    max-width: 98%;
     opacity: 1;
     z-index: -1;
   }
@@ -46,7 +46,7 @@
   /* Second video smaller size */
   #loopVideo {
     height: 100%;  /* smaller height */
-    max-width: 100%; /* max width smaller too */
+    max-width: 98%; /* max width smaller too */
     opacity: 0;
     z-index: -2;
   }
