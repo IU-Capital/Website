@@ -22,7 +22,7 @@
         <form class="form" method="POST" action="https://formsubmit.co/iucapitalconsult@gmail.com" id="contactForm">
           <input type="text" placeholder="Name" name="name" required />
           <input type="email" name="email" placeholder="Email Address" required>
-
+        
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_autoresponse" value="Thank you for reaching out! We will be in contact ASAP">
           <textarea rows="10" placeholder="Your Message" name="message" required></textarea>
@@ -31,6 +31,7 @@
             <span></span>
           </div>
         </form>
+        
         <div id="formMessage" style="margin-top: 20px;"></div>
       </div>
   
@@ -99,37 +100,7 @@
         </div>
       </div>
     </div>
-  </section>
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the default form submission
-      const form = event.target;
-      const formData = new FormData(form);
-      const loader = document.getElementById('loader');
-  
-      loader.style.display = 'block'; // Show the loader
-  
-      fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        loader.style.display = 'none'; // Hide the loader
-        if (response.ok) {
-          document.getElementById('formMessage').innerHTML = '<p style="color: green;">Your message has been sent successfully!</p>';
-          form.reset(); // Reset the form fields
-        } else {
-          document.getElementById('formMessage').innerHTML = '<p style="color: red;">There was an error sending your message. Please try again later.</p>';
-        }
-      }).catch(error => {
-        loader.style.display = 'none'; // Hide the loader
-        document.getElementById('formMessage').innerHTML = '<p style="color: red;">There was an error sending your message. Please try again later.</p>';
-      });
-    });
-  </script>
-  
+  </section>  
   
   <!-- CONTACT US -->
   <!-- MAP -->

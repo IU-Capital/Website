@@ -27,32 +27,29 @@
     left: 50%;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* change from contain to cover */
+    object-fit: cover; 
     transform: translate(-50%, -50%);
-    border-radius: 12px; /* optional */
+    border-radius: 12px;
     pointer-events: none;
     transition: opacity 1.5s ease;
   }
-  
-  
-  /* First video fills container height */
+      
   #introVideo {
     height: 100%;
     max-width: 98%;
     opacity: 1;
     z-index: -1;
   }
-  
-  /* Second video smaller size */
+    
   #loopVideo {
-    height: 100%;  /* smaller height */
-    max-width: 98%; /* max width smaller too */
+    height: 100%;  
+    max-width: 98%; 
     opacity: 0;
     z-index: -2;
   }
 
 .hero-text {
-    text-align: center;   /* This centers all text inside */
+    text-align: center;   
 }
 
 .hero-text h1 {

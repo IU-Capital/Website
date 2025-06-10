@@ -54,11 +54,11 @@ h2.about_title {
 
 .cards_wrapper {
   display: grid;
-  grid-template-columns: 1fr;      /* single column to force one card per row */
-  gap: 2rem;                      /* space between cards */
-  width: 95%;                    /* almost full width */
-  max-width: 95%;              /* optional max width for readability */
-  margin: 0 auto;                /* center horizontally */
+  grid-template-columns: 1fr;  
+  gap: 2rem;                   
+  width: 95%;                  
+  max-width: 95%;              
+  margin: 0 auto;               
   align-items: stretch;
 }
 .card {
@@ -67,7 +67,7 @@ h2.about_title {
   align-items: center;
   background: var(--color-bg-card);
   border-radius: 16px;
-  padding: 2rem 2rem 2rem 14rem; /* reduced from 18rem to 14rem */
+  padding: 2rem 2rem 2rem 14rem; 
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.12),
     inset 0 0 0 1px rgba(255, 215, 0, 0.15);
@@ -79,11 +79,6 @@ h2.about_title {
 
 .card:hover {
   transform: translateY(-12px);
-  /* box-shadow:
-    0 14px 28px rgba(255, 215, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 215, 0, 0.4); */
-  /* outline: 2px solid var(--color-gold);
-  outline-offset: 4px; */
 }
 
 .card img {

@@ -205,7 +205,7 @@ select:focus {
     transform: translate(-50%, -50%) translateY(0);
   }
   100% {
-    transform: translate(-50%, -50%) translateY(10px); /* adjust the distance the arrow moves */
+    transform: translate(-50%, -50%) translateY(10px); 
   }
 }
 

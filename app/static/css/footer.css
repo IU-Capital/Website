@@ -137,8 +137,6 @@ align-items: center;
   align-items: center;
 }
 
-/* (B3) MOVE ITEMS FROM TOP TO BOTTOM */
-/* bottom 0 = first item, bottom 300% = fourth item */
 .vmove { position: relative; bottom: 0; }
 @keyframes tickerv {
   0% { bottom: -100%; }

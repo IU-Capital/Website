@@ -9,7 +9,7 @@ menu .container {
 
 menu {
     background-color: var(--color-light); 
-    box-shadow: var(--color-shadow-dark) 0px 8px 24px; /* using shadow variable */
+    box-shadow: var(--color-shadow-dark) 0px 8px 24px; 
     position: sticky;
     width: 100%;
     top: 0;
@@ -36,7 +36,7 @@ menu .logo img {
 menu .logo p.logo_text {
     font-size: 22px;
     font-weight: 600;
-    color: var(--color-dark); /* dark text for logo */
+    color: var(--color-dark); 
 }
 
 nav {
@@ -46,7 +46,7 @@ nav {
     font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--color-dark); /* consistent dark nav text */
+    color: var(--color-dark); 
 }
 
 .mobile_menu {
@@ -61,7 +61,7 @@ nav.mobile {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-bg-light); /* consistent background */
+    background-color: var(--color-bg-light); 
     height: 100vh;
     width: 100%;
     transition: all 0.5s ease;
@@ -84,7 +84,7 @@ nav.mobile.menu_toggle {
         display: block;
         cursor: pointer;
         font-size: 30px;
-        position: absolute; /* fixed from display:absolute */
+        position: absolute; 
     }
     menu .logo {
         justify-content: center;
