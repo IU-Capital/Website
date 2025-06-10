@@ -26,18 +26,29 @@ h2 {
 
 .card {
   background-color: #3c434d;
+  color: white;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   padding: 30px;
   border-radius: 12px;
   margin-bottom: 40px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-/* Setup Guide specific styling */
+
 .card.setup-card {
   background-color: #3c434d;  
   padding: 20px 30px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setup-text {
+  width: 100%;
 }
 
 .card.setup-card p {
@@ -47,7 +58,7 @@ h2 {
 }
 
 .btn {
-  display: inline-block;
+  display: block;
   padding: 0.6rem 1.2rem;
   font-weight: 600;
   border-radius: 6px;
@@ -55,11 +66,24 @@ h2 {
   transition: background-color 0.3s ease;
   cursor: pointer;
   user-select: none;
-
-  margin-right: 1.5rem; 
+  margin: 0 auto 1rem auto; /* center & space between */
+  width: fit-content;
 }
 
-/* Optional: Remove margin on last button to avoid extra space at the end */
+.full-width-btn {
+  width: 100%; 
+  max-width: 300px;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+
 .btn:last-child {
   margin-right: 0;
 }
@@ -123,6 +147,8 @@ canvas {
 
 .scroll-container {
   max-height: 400px;  /* Adjust height as needed */
+  width: 100%;
+  overflow-x: auto;
   overflow-y: auto;
   border-top: 1px solid #334155;
 }

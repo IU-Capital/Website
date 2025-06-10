@@ -99,7 +99,10 @@ align-items: center;
   }
 }
 
-.hmove { display: flex; }
+.hmove { 
+  display: flex; 
+  color: black;
+}
 .hitem { width: 100%; flex-shrink: 0; }
 .hwrap { overflow: hidden; }
 

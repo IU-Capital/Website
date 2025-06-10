@@ -15,11 +15,19 @@
 
   <div class="section-wrapper">    
     <div class="card setup-card">
-      <p>To setup the Premium Signal Bot, Please follow the link below to log in.</p>
-      <a href="{{ url_for('main.setup') }}" class="btn btn-primary">SETUP</a>
-      <a href="{{ url_for('main.signals') }}" class="btn btn-primary">BUY NOW</a>
+      <div class="setup-text">
+        <p>To setup the Premium Signal Bot, Please follow the link below to log in.</p>
+      </div>
+      <div class="button-wrapper">
+        <a href="{{ url_for('main.setup') }}" class="btn btn-primary">SETUP</a>
+        <a href="{{ url_for('main.signals') }}" class="btn btn-primary">BUY NOW</a>
+      </div>
     </div>
   </div>
+  
+  
+  
+  
   
   <div class="section-wrapper">
     <h2>Account Info</h2>
