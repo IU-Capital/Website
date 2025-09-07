@@ -297,23 +297,58 @@ h2.about_title {
     object-position: center !important;
   }
   
-  .card_content {
+  /* Mobile card content - different for main page vs about page */
+  .about.main-page .card_content {
     margin-left: 0;
     padding-left: 0;
     font-size: 1rem;
     line-height: 1.6;
   }
   
-  .card h2 {
+  .about.about-page .card_content {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding: 1rem !important;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .about.main-page .card h2 {
     font-size: 1.6rem;
     margin-bottom: 1rem;
     text-align: center;
   }
   
-  .card p,
-  .card ul {
+  .about.about-page .card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--color-gold);
+  }
+  
+  .about.main-page .card p,
+  .about.main-page .card ul {
     font-size: 1.05rem;
     line-height: 1.7;
+  }
+  
+  .about.about-page .card p,
+  .about.about-page .card ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .about.about-page .card ul {
+    text-align: left;
+    padding-left: 1.2rem;
+  }
+  
+  .about.about-page .card ul li {
+    margin-bottom: 0.5rem;
+    text-align: left;
   }
   
   .services_list li {
@@ -366,15 +401,39 @@ h2.about_title {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   }
   
-  .card h2 {
+  .about.main-page .card h2 {
     font-size: 1.4rem;
     margin-bottom: 0.8rem;
   }
   
-  .card p,
-  .card ul {
+  .about.about-page .card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    color: var(--color-gold);
+  }
+  
+  .about.main-page .card p,
+  .about.main-page .card ul {
     font-size: 1rem;
     line-height: 1.6;
+  }
+  
+  .about.about-page .card p,
+  .about.about-page .card ul {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: left;
+    margin-bottom: 0.8rem;
+  }
+  
+  .about.about-page .card ul {
+    padding-left: 1rem;
+  }
+  
+  .about.about-page .card ul li {
+    margin-bottom: 0.4rem;
+    text-align: left;
   }
   
   .services_list li {
@@ -427,22 +486,52 @@ h2.about_title {
     flex-shrink: 0 !important;
   }
   
-  .card_content {
+  .about.main-page .card_content {
     flex: 1;
     margin-left: 0;
     padding-left: 0;
   }
   
-  .card h2 {
+  .about.about-page .card_content {
+    flex: 1;
+    margin-left: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .about.main-page .card h2 {
     font-size: 1.3rem;
     text-align: left;
     margin-bottom: 0.5rem;
   }
   
-  .card p,
-  .card ul {
+  .about.about-page .card h2 {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: var(--color-gold);
+  }
+  
+  .about.main-page .card p,
+  .about.main-page .card ul {
     font-size: 0.9rem;
     line-height: 1.5;
+  }
+  
+  .about.about-page .card p,
+  .about.about-page .card ul {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: left;
+    margin-bottom: 0.6rem;
+  }
+  
+  .about.about-page .card ul {
+    padding-left: 0.8rem;
+  }
+  
+  .about.about-page .card ul li {
+    margin-bottom: 0.3rem;
   }
 }
 
