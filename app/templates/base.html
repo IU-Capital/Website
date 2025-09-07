@@ -2,8 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <meta name="description" content="IU CAPITAL offers expert trading insights and personalized support tailored to your unique trading goals. Built by traders, for traders—unlock your full market potential with our experienced team.">
+    
+    <!-- Enhanced Mobile Optimization -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ba9d5d">
+    <meta name="msapplication-navbutton-color" content="#ba9d5d">
+    <meta name="apple-mobile-web-app-title" content="IU Capital">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ url_for('static', filename='css/main.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', filename='images/IU_CAPITAL_LOGO.webp') }}" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="style">
 
     <title>IU Capital - {% block title %}{% endblock %}</title>
 
@@ -14,7 +28,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hero.css') }}">     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}">     
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive-images.css') }}">     
     {% block styles %}{% endblock %}
     <link
       rel="stylesheet"

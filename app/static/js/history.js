@@ -11,10 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
         accountTable.innerHTML = "";
         dealTable.innerHTML = "";
 
-        const sortedDeals = data.deals
-        .filter(deal => deal.symbol && deal.symbol !== "US30" && !isNaN(deal.profit))
-        .sort((a, b) => new Date(a.time) - new Date(b.time));
-    
+        const filteredDeals = data.deals
+            .filter(deal => deal.symbol && deal.symbol !== "US30" && !isNaN(deal.profit))
+            .filter(deal => {
+                const p = parseFloat(deal.profit);
+                return p > 1 || p < -1;
+            })
+            .sort((a, b) => new Date(a.time) - new Date(b.time));
 
         const balance = parseFloat(data.account.balance || initialBalance);
         let cumulative = initialBalance;
@@ -28,17 +31,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const labels = [];
         const dealInfo = [];
 
-        for (const deal of sortedDeals) {
+        const firstDate = new Date(filteredDeals[0]?.time);
+        const startDateKey = firstDate.toISOString().split('T')[0];
+        labels.push(startDateKey);
+        equityHistory.push(initialBalance);
+        dealInfo.push({
+            time: firstDate.toISOString(),
+            symbol: 'START',
+            type: '',
+            volume: '',
+            profit: '0.00'
+        });
+
+        const equityMap = {};
+
+        for (const deal of filteredDeals) {
             const profit = parseFloat(deal.profit);
-
-            if (profit === 0) continue;
-
             cumulative += profit;
 
             if (profit > 0) {
                 grossProfit += profit;
                 wins++;
-            } else if (profit < 0) {
+            } else {
                 grossLoss += Math.abs(profit);
                 losses++;
             }
@@ -46,50 +60,94 @@ document.addEventListener("DOMContentLoaded", () => {
             peak = Math.max(peak, cumulative);
 
             const dealDate = new Date(deal.time);
-            const dateLabel = dealDate.toLocaleDateString();
-            labels.push(dateLabel);
-            equityHistory.push(parseFloat(cumulative.toFixed(2)));
+            const dateKey = dealDate.toISOString().split('T')[0];
 
-            dealInfo.push({
-                time: deal.time,
-                symbol: deal.symbol,
-                type: deal.type,
-                volume: deal.volume,
-                profit: profit.toFixed(2)
-            });
+            equityMap[dateKey] = {
+                equity: parseFloat(cumulative.toFixed(2)),
+                deal: {
+                    time: deal.time,
+                    symbol: deal.symbol,
+                    type: deal.type,
+                    volume: deal.volume,
+                    profit: profit.toFixed(2)
+                }
+            };
+        }
+
+        const sortedDates = Object.keys(equityMap).sort();
+        for (const date of sortedDates) {
+            labels.push(date);
+            equityHistory.push(equityMap[date].equity);
+            dealInfo.push(equityMap[date].deal);
         }
 
         const totalProfit = balance - initialBalance;
         const percentageGain = (totalProfit / initialBalance) * 100;
-        const totalTrades = sortedDeals.length;
+        const totalTrades = filteredDeals.length;
 
-        const firstTradeDate = new Date(sortedDeals[0].time);
-        const lastTradeDate = new Date(sortedDeals[sortedDeals.length - 1].time);
-
-        const msPerDay = 1000 * 60 * 60 * 24;
-        const tradingDays = Math.floor((lastTradeDate - firstTradeDate) / msPerDay) + 1;
-
-        // No weeklyEquity calculation here since it's empty in original code
+        const firstTradeDate = new Date(filteredDeals[0]?.time);
+        const lastTradeDate = new Date(filteredDeals[filteredDeals.length - 1]?.time);
+        const tradingDays = Math.floor((lastTradeDate - firstTradeDate) / (1000 * 60 * 60 * 24)) + 1;
 
         const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit;
         const winRate = (wins / totalTrades) * 100 || 0;
         const profitClass = totalProfit >= 0 ? "positive" : "negative";
-        const uniqueSymbols = [...new Set(sortedDeals.map(deal => deal.symbol))].join(', ');
+        const uniqueSymbols = [...new Set(filteredDeals.map(deal => deal.symbol))].join(', ');
 
-        accountTable.innerHTML += `<tr><th>Account Balance</th><td>$ ${balance.toFixed(2)}</td></tr>`;
-        accountTable.innerHTML += `<tr><th>Total Profit / Loss</th><td class="profit ${profitClass}">$ ${totalProfit.toFixed(2)}</td></tr>`;
+        const avgProfitPerTrade = totalProfit / totalTrades || 0;
+        const avgWin = wins > 0 ? grossProfit / wins : 0;
+        const avgLoss = losses > 0 ? grossLoss / losses : 0;
+        const profitLossRatio = avgLoss > 0 ? avgWin / avgLoss : avgWin;
+
+        let peakEquity = initialBalance;
+        let maxDrawdown = 0;
+        for (const equity of equityHistory) {
+            if (equity > peakEquity) peakEquity = equity;
+            const drawdown = peakEquity - equity;
+            if (drawdown > maxDrawdown) maxDrawdown = drawdown;
+        }
+
+        let longestWinStreak = 0, longestLossStreak = 0;
+        let currentWinStreak = 0, currentLossStreak = 0;
+
+        for (const deal of filteredDeals) {
+            const profit = parseFloat(deal.profit);
+            if (profit > 0) {
+                currentWinStreak++;
+                currentLossStreak = 0;
+                if (currentWinStreak > longestWinStreak) longestWinStreak = currentWinStreak;
+            } else if (profit < 0) {
+                currentLossStreak++;
+                currentWinStreak = 0;
+                if (currentLossStreak > longestLossStreak) longestLossStreak = currentLossStreak;
+            } else {
+                currentWinStreak = 0;
+                currentLossStreak = 0;
+            }
+        }
+
+        const totalVolume = filteredDeals.reduce((sum, deal) => sum + parseFloat(deal.volume || 0), 0);
+
+        accountTable.innerHTML += `<tr><th>Starting Balance</th><td>$${initialBalance.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Current Balance</th><td>$${balance.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Total Profit / Loss</th><td class="profit ${profitClass}">$${totalProfit.toFixed(2)}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Percentage Gain</th><td class="profit ${profitClass}">${percentageGain.toFixed(2)}%</td></tr>`;
         accountTable.innerHTML += `<tr><th>Profit Factor</th><td>${profitFactor.toFixed(2)}</td></tr>`;
-        accountTable.innerHTML += `<tr><th>Win Rate</th><td>${winRate.toFixed(2)}%</td></tr>`;   
-        accountTable.innerHTML += `<tr><th>Traded Instruments</th><td>${uniqueSymbols}</td></tr>`; 
+        accountTable.innerHTML += `<tr><th>Win Rate</th><td>${winRate.toFixed(2)}%</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Traded Instruments</th><td>${uniqueSymbols}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Total Deals</th><td>${totalTrades}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Trading Days Count</th><td>${tradingDays}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Average Profit per Trade</th><td>$${avgProfitPerTrade.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Average Win</th><td>$${avgWin.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Average Loss</th><td>$${avgLoss.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Profit / Loss Ratio</th><td>${profitLossRatio.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Max Drawdown</th><td>$${maxDrawdown.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Longest Winning Streak</th><td>${longestWinStreak} trades</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Longest Losing Streak</th><td>${longestLossStreak} trades</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Total Volume Traded</th><td>${totalVolume.toFixed(2)}</td></tr>`;
 
-        // Show deals in reverse chronological order
-        for (const deal of sortedDeals.slice().reverse()) {
+        for (const deal of filteredDeals.slice().reverse()) {
             const profit = parseFloat(deal.profit);
-            if (profit === 0) continue;
-
             const dealProfitClass = profit >= 0 ? "positive" : "negative";
             dealTable.innerHTML += `
                 <tr>
@@ -102,13 +160,23 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         }
 
-        // Chart drawing
+        // === FIXED Y-AXIS SCALE ===
+        let minY = Math.min(...equityHistory);
+        let maxY = Math.max(...equityHistory);
+
+        if (minY === maxY) {
+            minY -= 10;
+            maxY += 10;
+        } else {
+            const range = maxY - minY;
+            const padding = Math.max(10, range * 0.05);
+            minY = Math.floor(minY - padding);
+            maxY = Math.ceil(maxY + padding);
+        }
+
+        // Chart rendering
         const ctx = document.getElementById('equityChart').getContext('2d');
         if (equityChart) equityChart.destroy();
-
-        const minY = Math.min(...equityHistory);
-        const maxY = Math.max(...equityHistory);
-        const padding = (maxY - minY) * 0.1;
 
         const gradient = ctx.createLinearGradient(0, 0, 0, 400);
         gradient.addColorStop(0, 'rgba(250, 204, 21, 0.4)');
@@ -119,43 +187,50 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Equity',
+                    label: 'Equity Curve',
                     data: equityHistory,
                     borderColor: '#facc15',
                     backgroundColor: gradient,
                     pointBackgroundColor: '#facc15',
                     pointBorderColor: '#1e293b',
+                    pointRadius: 3,
                     pointHoverRadius: 6,
-                    pointRadius: 4,
-                    pointBorderWidth: 2,
+                    pointBorderWidth: 1.5,
                     fill: true,
-                    tension: 0.4,
+                    tension: 0.45,
+                    borderWidth: 2
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 20
+                },
                 scales: {
                     x: {
-                        ticks: { color: '#e2e8f0', maxRotation: 60 },
-                        grid: { color: '#334155' }
+                        ticks: {
+                            color: '#cbd5e1',
+                            font: { family: 'Roboto Mono', size: 12 }
+                        },
+                        grid: {
+                            color: 'rgba(100,116,139,0.2)'
+                        }
                     },
                     y: {
-                        ticks: { color: '#e2e8f0' },
-                        grid: { color: '#334155' },
-                        min: Math.floor(minY - padding),
-                        max: Math.ceil(maxY + padding)
+                        ticks: {
+                            color: '#cbd5e1',
+                            font: { family: 'Roboto Mono', size: 12 }
+                        },
+                        grid: {
+                            color: 'rgba(100,116,139,0.2)'
+                        },
+                        min: minY,
+                        max: maxY
                     }
                 },
                 plugins: {
-                    legend: {
-                        labels: {
-                            color: '#facc15',
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            }
-                        }
-                    },
+                    legend: { display: false },
                     tooltip: {
                         mode: 'nearest',
                         intersect: false,
@@ -164,16 +239,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         bodyColor: '#e2e8f0',
                         borderColor: '#facc15',
                         borderWidth: 1,
+                        cornerRadius: 6,
                         callbacks: {
                             label: function (context) {
                                 const index = context.dataIndex;
                                 const deal = dealInfo[index];
                                 return [
-                                    `Symbol: ${deal.symbol}`,
+                                    `${deal.symbol}`,
                                     `Type: ${deal.type}`,
-                                    `Volume: ${deal.volume}`,
-                                    `Profit: $${deal.profit}`,
-                                    `Time: ${new Date(deal.time).toLocaleString()}`
+                                    `Vol: ${deal.volume}`,
+                                    `P&L: $${deal.profit}`,
+                                    `🕒 ${new Date(deal.time).toLocaleString()}`
                                 ];
                             }
                         }
@@ -187,6 +263,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Call fetchHistory once on page load
-    fetchHistory();        
+    fetchHistory();
 });

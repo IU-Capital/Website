@@ -69,25 +69,46 @@ def authenticate():
         return jsonify({"error": f"Failed to connect to auth server: {str(e)}"}), 500
 
 @main.route('/update', methods=['POST'])
-def update_direct():
+def update_proxy():
     try:
-        # Forward the raw form data
-        data = request.form
-        resp = requests.post(f"{TCSERVER1}/update", data=data)
+        headers = {
+            'X-EMAIL-ADDRESS': request.headers.get('X-EMAIL-ADDRESS'),
+            'X-PASSWORD': request.headers.get('X-PASSWORD'),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        # Forward form data as-is
+        data = request.form.to_dict(flat=True)  # converts ImmutableMultiDict to regular dict
+
+        # Forward to actual trade server
+        resp = requests.post(f"{TCSERVER1}/update", headers=headers, data=data)
+
         return (resp.text, resp.status_code, resp.headers.items())
+
     except Exception as e:
-        return jsonify({"error": f"Failed to connect to update server: {str(e)}"}), 500
+        return jsonify({"error": f"Proxy failed to reach trade server: {str(e)}"}), 500
 
-
-@main.route('/signal', methods=['GET'])
+@main.route('/signal', methods=['GET', 'POST'])
 def signal_direct():
     try:
-        resp = requests.get(f"{TCSERVER1}/signal")
+        headers = {
+            'X-EMAIL-ADDRESS': request.headers.get('X-EMAIL-ADDRESS'),
+            'X-PASSWORD': request.headers.get('X-PASSWORD'),
+            # Set content-type explicitly as form-urlencoded
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        if request.method == 'POST':
+            # Forward the form data as dictionary (empty dict if none)
+            data = request.form.to_dict() or {}
+            resp = requests.post(f"{TCSERVER1}/signal", headers=headers, data=data)
+        else:
+            # On GET, just do a POST without data? Or adapt as needed
+            resp = requests.get(f"{TCSERVER1}/signal", headers=headers)
+
         return (resp.text, resp.status_code, resp.headers.items())
     except Exception as e:
         return jsonify({"error": f"Failed to connect to signal server: {str(e)}"}), 500
-
-
 
 @main.route('/')
 def index():
@@ -182,4 +203,3 @@ def setup():
     user_email = session['user_email']
     flash(f'Welcome, {user_email}!', 'success')
     return render_template('setup.html')
-

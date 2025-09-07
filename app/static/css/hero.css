@@ -64,3 +64,106 @@
     line-height: 1.7;
     color: #222;
 }
+
+/* Mobile Responsive Hero Styles */
+@media screen and (max-width: 480px) {
+  .hero {
+    height: 300px;
+    width: 98%;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  .hero-background {
+    border-radius: 8px;
+  }
+  
+  .hero-background video {
+    border-radius: 8px;
+  }
+  
+  .hero-text h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .hero-text p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 600px) {
+  .hero {
+    height: 400px;
+    width: 97%;
+    margin-top: 25px;
+    border-radius: 10px;
+  }
+  
+  .hero-background {
+    border-radius: 10px;
+  }
+  
+  .hero-background video {
+    border-radius: 10px;
+  }
+  
+  .hero-text h1 {
+    font-size: 32px;
+    margin-bottom: 18px;
+  }
+  
+  .hero-text p {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .hero {
+    height: 500px;
+    width: 96%;
+    margin-top: 30px;
+  }
+  
+  .hero-text h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .hero {
+    height: 600px;
+  }
+  
+  .hero-text h1 {
+    font-size: 42px;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 250px;
+  }
+  
+  .hero-text h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .hero-text p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hero-background video {
+    /* Optimize video playback for touch devices */
+    will-change: transform;
+  }
+}

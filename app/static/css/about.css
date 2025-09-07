@@ -67,13 +67,13 @@ h2.about_title {
   align-items: center;
   background: var(--color-bg-card);
   border-radius: 16px;
-  padding: 2rem 2rem 2rem 14rem; 
+  padding: 2rem; 
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.12),
     inset 0 0 0 1px rgba(255, 215, 0, 0.15);
   color: var(--color-darker);
   min-height: 280px;
-  overflow: visible;
+  overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
@@ -81,11 +81,12 @@ h2.about_title {
   transform: translateY(-12px);
 }
 
-.card img {
+/* Main page card images (index.html) */
+.about.main-page .card img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 400px;
+  width: 50%;
   height: 100%;
   object-fit: cover;
   border-top-left-radius: 16px;
@@ -95,23 +96,62 @@ h2.about_title {
   transition: transform 0.3s ease;
   z-index: 0;
   
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+  /* Enhanced fade effect that works across browsers */
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
 }
 
-.card:hover img {
+/* About page card images (about.html) - same as main page layout */
+.about.about-page .card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+  transition: transform 0.3s ease;
+  z-index: 0;
+  
+  /* Enhanced fade effect that works across browsers */
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+.about.main-page .card:hover img,
+.about.about-page .card:hover img {
   transform: scale(1.05);
   filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
 }
 
-/* The content should be on top */
-.card_content {
+/* The content should be on top - Main page */
+.about.main-page .card_content {
   position: relative;
   z-index: 1;
   flex: 1;
-  padding-left: 12rem;
+  margin-left: 50%;
+  padding-left: 2rem;
   line-height: 1.8;            /* improved line spacing */
   font-size: 1.8rem;           /* slightly smaller for better balance */
+  color: var(--color-darker);
+}
+
+/* About page content - same as main page layout */
+.about.about-page .card_content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  margin-left: 50%;
+  padding-left: 2rem;
+  line-height: 1.8;
+  font-size: 1.6rem;
   color: var(--color-darker);
 }
 
@@ -204,28 +244,183 @@ h2.about_title {
 }
 
 
+/* Enhanced Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
-  .card {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding: 1.5rem;
+  h1.about_title,
+  h2.about_title {
+    font-size: 2rem;
+    padding-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
+  
+  .cards_wrapper {
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .card {
+    flex-direction: column;
+    padding: 1.5rem;
+    min-height: auto;
+    text-align: left;
+  }
+  
   .card img {
+    position: static;
     width: 100%;
     height: 200px;
     margin-bottom: 1.2rem;
+    border-radius: 12px;
     transform: none !important;
     filter: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    mask-image: none;
+    -webkit-mask-image: none;
   }
+  
   .card_content {
-    justify-content: flex-start;
+    margin-left: 0;
+    padding-left: 0;
+    font-size: 1rem;
+    line-height: 1.6;
   }
+  
   .card h2 {
     font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
   }
+  
   .card p,
   .card ul {
     font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  
+  .services_list li {
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+  }
+  
+  .about_button {
+    margin: 1.5rem auto;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about_content {
+    padding: 0.5rem;
+  }
+  
+  h1.about_title,
+  h2.about_title {
+    font-size: 1.75rem;
+    padding-top: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .cards_wrapper {
+    gap: 1.25rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+  
+  .card img {
+    height: 180px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .card p,
+  .card ul {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .services_list li {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+  }
+  
+  .services_list li::before {
+    font-size: 1.1rem;
+  }
+  
+  .about_button {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+    margin: 1.25rem auto;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  h1.about_title,
+  h2.about_title {
+    font-size: 1.8rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card {
+    flex-direction: row;
+    padding: 1rem;
+  }
+  
+  .card img {
+    width: 40%;
+    height: 150px;
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+  
+  .card_content {
+    flex: 1;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .card h2 {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card p,
+  .card ul {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .card:hover {
+    transform: none;
+  }
+  
+  .card-link:hover .card {
+    transform: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 215, 0, 0.15);
+  }
+  
+  .about_button:hover {
+    background: var(--color-gold);
+    box-shadow: 0 4px 12px rgba(230, 194, 0, 0.6);
+    transform: none;
   }
 }

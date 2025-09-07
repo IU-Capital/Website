@@ -291,9 +291,98 @@ h2.title {
   margin: 10px;
 }
 
-/* Responsive */
-@media screen and (max-width: 600px) {
+/* Responsive Design - Mobile First Approach */
+
+/* Base mobile styles (320px and up) */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  /* Adjust button sizes for mobile */
+  .button1 button,
+  .button2 button {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+  
+  .button3 button {
+    font-size: 16px;
+  }
+  
+  /* Improve title spacing */
+  h2.title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Loader optimization */
+  .loader > img {
+    width: 200px;
+    max-width: 80vw;
+  }
+}
+
+/* Small mobile devices (481px to 600px) */
+@media screen and (min-width: 481px) and (max-width: 600px) {
   .container {
     padding: 0 20px;
+  }
+  
+  h2.title {
+    font-size: 1.75rem;
+  }
+  
+  .loader > img {
+    width: 250px;
+  }
+}
+
+/* Tablets (601px to 768px) */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  h2.title {
+    font-size: 1.9rem;
+  }
+}
+
+/* Small laptops (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 35px;
+  }
+}
+
+/* Large screens (1025px and up) */
+@media screen and (min-width: 1025px) {
+  .container {
+    padding: 0 45px;
+  }
+}
+
+/* High DPI displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+  /* Optimize for retina displays */
+  .button1 button,
+  .button2 button,
+  .button3 button {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .container {
+    padding: 0 25px;
+  }
+  
+  h2.title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
   }
 }

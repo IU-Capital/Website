@@ -72,6 +72,7 @@ nav.mobile.menu_toggle {
     left: 0;
 }
 
+/* Enhanced Mobile Navigation */
 @media screen and (max-width: 1271px) {
     menu nav.full_screen {
         display: none;
@@ -79,16 +80,102 @@ nav.mobile.menu_toggle {
     menu .container {
         justify-content: space-between;
         padding: 10px;
+        position: relative;
     }
     menu .mobile_menu {
         display: block;
         cursor: pointer;
         font-size: 30px;
-        position: absolute; 
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+        color: var(--color-dark);
+        transition: color 0.3s ease;
+    }
+    menu .mobile_menu:hover {
+        color: var(--color-gold);
     }
     menu .logo {
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        width: 100%;
+        width: auto;
+        margin-left: 0;
     }
+}
+
+/* Mobile-specific improvements */
+@media screen and (max-width: 768px) {
+    menu .container {
+        padding: 8px 15px;
+    }
+    
+    menu .logo img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    menu .logo p.logo_text {
+        font-size: 18px;
+    }
+    
+    nav.mobile {
+        background-color: rgba(250, 250, 250, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    nav.mobile a {
+        font-size: 20px;
+        padding: 15px 0;
+        margin: 10px 0;
+        border-bottom: 1px solid rgba(186, 157, 93, 0.2);
+        width: 80%;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    nav.mobile a:hover {
+        color: var(--color-gold);
+        background-color: rgba(186, 157, 93, 0.1);
+        border-radius: 8px;
+        transform: translateY(-2px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    menu .container {
+        padding: 5px 10px;
+    }
+    
+    menu .logo img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    menu .logo p.logo_text {
+        font-size: 16px;
+    }
+    
+    menu .mobile_menu {
+        font-size: 26px;
+        right: 15px;
+    }
+    
+    nav.mobile a {
+        font-size: 18px;
+        padding: 12px 0;
+        margin: 8px 0;
+    }
+}
+
+/* Improve mobile menu animation */
+nav.mobile {
+    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Add close button styling when menu is open */
+nav.mobile.menu_toggle ~ menu .mobile_menu {
+    color: var(--color-gold);
 }

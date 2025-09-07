@@ -1,0 +1,213 @@
+/* Responsive Images Optimization */
+
+/* Base image styles */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Logo optimizations */
+.logo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Footer logo handled in footer.css */
+
+/* Hero video optimizations */
+.hero-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Service images */
+.services_container_item img {
+  width: 100%;
+  max-width: 132px;
+  height: auto;
+  object-fit: contain;
+  margin: 52px auto 17px;
+}
+
+/* Card images in about section - removed conflicting styles, handled in about.css */
+
+/* Loader image */
+.loader img {
+  max-width: 90vw;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Mobile-specific image optimizations */
+@media screen and (max-width: 768px) {
+  /* Logo adjustments */
+  menu .logo img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+  
+  /* Footer logo handled in footer.css */
+  
+  /* Service images */
+  .services_container_item img {
+    width: 100px;
+    height: 75px;
+    margin: 30px auto 15px;
+    object-fit: contain;
+  }
+  
+  /* Card images */
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+  }
+  
+  /* Loader */
+  .loader img {
+    width: 250px;
+    max-width: 80vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Logo adjustments */
+  menu .logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  /* Footer logo handled in footer.css */
+  
+  /* Service images */
+  .services_container_item img {
+    width: 80px;
+    height: 60px;
+    margin: 25px auto 12px;
+  }
+  
+  /* Card images */
+  .card img {
+    height: 180px;
+    border-radius: 8px;
+  }
+  
+  /* Loader */
+  .loader img {
+    width: 200px;
+    max-width: 75vw;
+  }
+}
+
+/* Landscape orientation optimizations */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .card img {
+    width: 40%;
+    height: 150px;
+    margin-bottom: 0;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .services_container_item img {
+    width: 80px;
+    height: 60px;
+    margin: 0 20px 0 0;
+    flex-shrink: 0;
+  }
+}
+
+/* High DPI (Retina) display optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+  /* Ensure crisp images on high DPI displays */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Logo specific optimizations */
+  .logo img {
+    image-rendering: auto;
+  }
+  
+  /* Footer logo handled in footer.css */
+}
+
+/* WebP support with fallbacks */
+.webp .hero-background video {
+  /* Optimized for browsers that support WebP */
+  will-change: transform;
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Print media optimizations */
+@media print {
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+  
+  .hero-background video {
+    display: none;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .hero-background video {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  img {
+    transition: none !important;
+  }
+}
+
+/* Dark mode image adjustments */
+@media (prefers-color-scheme: dark) {
+  img {
+    filter: brightness(0.9);
+  }
+  
+  .logo img,
+  .footer1_logo img {
+    filter: none;
+  }
+}
+
+/* Performance optimizations for slow connections */
+@media (prefers-reduced-data: reduce) {
+  .hero-background video {
+    display: none;
+  }
+  
+  .card img {
+    filter: blur(0.5px);
+    transition: filter 0.3s ease;
+  }
+  
+  .card img:hover {
+    filter: none;
+  }
+}
