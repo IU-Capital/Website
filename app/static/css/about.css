@@ -267,7 +267,8 @@ h2.about_title {
     text-align: left;
   }
   
-  .card img {
+  /* Main page mobile images */
+  .about.main-page .card img {
     position: static;
     width: 100%;
     height: 200px;
@@ -278,6 +279,22 @@ h2.about_title {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
     mask-image: none;
     -webkit-mask-image: none;
+  }
+  
+  /* About page mobile images - optimized for profile pictures */
+  .about.about-page .card img {
+    position: static;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 50%;
+    transform: none !important;
+    filter: none;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    mask-image: none;
+    -webkit-mask-image: none;
+    object-fit: cover;
+    object-position: center;
   }
   
   .card_content {
@@ -333,10 +350,20 @@ h2.about_title {
     border-radius: 12px;
   }
   
-  .card img {
+  /* Main page mobile images - smaller screens */
+  .about.main-page .card img {
     height: 180px;
     border-radius: 8px;
     margin-bottom: 1rem;
+  }
+  
+  /* About page mobile images - smaller profile pictures */
+  .about.about-page .card img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.2rem auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
   .card h2 {
@@ -381,11 +408,23 @@ h2.about_title {
     padding: 1rem;
   }
   
-  .card img {
+  /* Main page landscape images */
+  .about.main-page .card img {
     width: 40%;
     height: 150px;
     margin-bottom: 0;
     margin-right: 1rem;
+    border-radius: 12px;
+  }
+  
+  /* About page landscape images - circular profile pictures */
+  .about.about-page .card img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 0;
+    margin-right: 1.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
   
   .card_content {
