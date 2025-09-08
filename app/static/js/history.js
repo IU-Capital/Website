@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     let equityChart;
-    const initialBalance = 1500;
+    const initialBalance = 10000;
 
     async function fetchHistory() {
         const response = await fetch('https://iucapitalfund.com/api/get_history');
