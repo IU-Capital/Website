@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Get filtered deals for display in the table (excluding US30 and small trades)
         const filteredDeals = allTradingDeals
-            .filter(deal => deal.symbol && deal.symbol !== "US30")
+            .filter(deal => deal.symbol)
             .filter(deal => {
                 const p = parseFloat(deal.profit);
                 return p > 1 || p < -1;
