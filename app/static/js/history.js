@@ -20,13 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
             actualStartingBalance += parseFloat(transaction.profit);
         }
 
-        // Get all trading deals (excluding deposits/withdrawals) for the graph
+        // Get all trading deals (excluding deposits/withdrawals and zero PnL trades) for the graph
         const allTradingDeals = data.deals
             .filter(deal => deal.comment !== "Deposit" && !deal.comment.includes("Withdrawal"))
             .filter(deal => !isNaN(deal.profit))
+            .filter(deal => parseFloat(deal.profit) !== 0)
             .sort((a, b) => new Date(a.time) - new Date(b.time));
 
-        // Get filtered deals for display in the table (excluding small trades only)
+        // Get filtered deals for display in the table
         const filteredDeals = allTradingDeals
             .filter(deal => deal.symbol)
             .filter(deal => {
