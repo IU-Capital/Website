@@ -10,8 +10,8 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-background">
-    <video id="introVideo" autoplay muted playsinline preload="auto" src="{{ url_for('static', filename='images/logo_animation.mp4') }}"></video>
-    <video id="loopVideo" muted playsinline preload="auto" src="{{ url_for('static', filename='images/hero_video_loop.mp4') }}" loop></video>
+    <video id="introVideo" autoplay muted playsinline preload="metadata" src="{{ url_for('static', filename='images/logo_animation.mp4') }}"></video>
+    <video id="loopVideo" muted playsinline preload="none" src="{{ url_for('static', filename='images/hero_video_loop.mp4') }}" loop></video>
   </div>
 </section>
 
@@ -199,21 +199,54 @@
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-  const introVideo = document.getElementById('introVideo');
-  const loopVideo = document.getElementById('loopVideo');
+    const introVideo = document.getElementById('introVideo');
+    const loopVideo = document.getElementById('loopVideo');
 
-  introVideo.addEventListener('ended', () => {
-    // Fade out intro video
-    introVideo.style.opacity = 0;
+    // Preload the loop video when intro video starts playing
+    introVideo.addEventListener('loadeddata', () => {
+      // Start preloading the loop video once intro video is ready
+      loopVideo.load();
+    });
 
-    // Fade in loop video
-    loopVideo.style.opacity = 1;
+    // Handle intro video ending
+    introVideo.addEventListener('ended', () => {
+      // Fade out intro video
+      introVideo.style.opacity = 0;
 
-    // Start playing loop video
-    loopVideo.play();
+      // Fade in loop video
+      loopVideo.style.opacity = 1;
+
+      // Start playing loop video
+      loopVideo.play();
+    });
+
+    // Add error handling for better user experience
+    introVideo.addEventListener('error', (e) => {
+      console.warn('Intro video failed to load:', e);
+      // Hide video container if both videos fail
+      if (loopVideo.error) {
+        document.querySelector('.hero-background').style.display = 'none';
+      }
+    });
+
+    loopVideo.addEventListener('error', (e) => {
+      console.warn('Loop video failed to load:', e);
+    });
+
+    // Optimize for mobile - pause videos when page is not visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        introVideo.pause();
+        loopVideo.pause();
+      } else {
+        if (introVideo.style.opacity !== '0') {
+          introVideo.play();
+        } else {
+          loopVideo.play();
+        }
+      }
+    });
   });
-});
-
 </script>
 
 {% endblock %}
