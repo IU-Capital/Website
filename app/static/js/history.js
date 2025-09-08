@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             volume: '',
             profit: '0.00'
         });
-
-        // Plot EVERY single trade as a separate point
+        
         for (let i = 0; i < allTradingDeals.length; i++) {
             const deal = allTradingDeals[i];
             const profit = parseFloat(deal.profit);
@@ -230,8 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 scales: {
                     x: {
                         ticks: {
-                            color: '#cbd5e1',
-                            font: { family: 'Roboto Mono', size: 12 }
+                            display: false
                         },
                         grid: {
                             color: 'rgba(100,116,139,0.2)'
