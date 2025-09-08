@@ -20,14 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
             actualStartingBalance += parseFloat(transaction.profit);
         }
 
-        const filteredDeals = data.deals
-            .filter(deal => deal.symbol && deal.symbol !== "US30" && !isNaN(deal.profit))
+        // Get all trading deals (excluding deposits/withdrawals) for the graph
+        const allTradingDeals = data.deals
             .filter(deal => deal.comment !== "Deposit" && !deal.comment.includes("Withdrawal"))
+            .filter(deal => !isNaN(deal.profit))
+            .sort((a, b) => new Date(a.time) - new Date(b.time));
+
+        // Get filtered deals for display in the table (excluding US30 and small trades)
+        const filteredDeals = allTradingDeals
+            .filter(deal => deal.symbol && deal.symbol !== "US30")
             .filter(deal => {
                 const p = parseFloat(deal.profit);
                 return p > 1 || p < -1;
-            })
-            .sort((a, b) => new Date(a.time) - new Date(b.time));
+            });
 
         const balance = parseFloat(data.account.balance || actualStartingBalance);
         let cumulative = actualStartingBalance;
@@ -41,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const labels = [];
         const dealInfo = [];
 
-        const firstDate = new Date(filteredDeals[0]?.time);
+        const firstDate = new Date(allTradingDeals[0]?.time);
         const startDateKey = firstDate.toISOString().split('T')[0];
         labels.push(startDateKey);
         equityHistory.push(actualStartingBalance);
@@ -55,10 +60,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const equityMap = {};
 
-        for (const deal of filteredDeals) {
+        // Build equity curve using ALL trading deals to match the actual balance
+        for (const deal of allTradingDeals) {
             const profit = parseFloat(deal.profit);
             cumulative += profit;
 
+            if (cumulative > peak) peak = cumulative;
+
+            const dealDate = new Date(deal.time);
+            const dateKey = dealDate.toISOString().split('T')[0];
+
+            // Only store the latest deal for each date for the graph
+            equityMap[dateKey] = {
+                equity: parseFloat(cumulative.toFixed(2)),
+                deal: {
+                    time: deal.time,
+                    symbol: deal.symbol || 'N/A',
+                    type: deal.type || 'N/A',
+                    volume: deal.volume || '0',
+                    profit: profit.toFixed(2)
+                }
+            };
+        }
+
+        // Calculate statistics using filtered deals for display
+        for (const deal of filteredDeals) {
+            const profit = parseFloat(deal.profit);
             if (profit > 0) {
                 grossProfit += profit;
                 wins++;
@@ -66,22 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 grossLoss += Math.abs(profit);
                 losses++;
             }
-
-            if (cumulative > peak) peak = cumulative;
-
-            const dealDate = new Date(deal.time);
-            const dateKey = dealDate.toISOString().split('T')[0];
-
-            equityMap[dateKey] = {
-                equity: parseFloat(cumulative.toFixed(2)),
-                deal: {
-                    time: deal.time,
-                    symbol: deal.symbol,
-                    type: deal.type,
-                    volume: deal.volume,
-                    profit: profit.toFixed(2)
-                }
-            };
         }
 
         const sortedDates = Object.keys(equityMap).sort();
@@ -91,12 +102,23 @@ document.addEventListener("DOMContentLoaded", () => {
             dealInfo.push(equityMap[date].deal);
         }
 
+        // Ensure the final equity value matches the current balance from API
+        if (equityHistory.length > 0) {
+            const finalEquity = equityHistory[equityHistory.length - 1];
+            const expectedBalance = balance;
+            
+            // If there's a discrepancy, adjust the final point to match the API balance
+            if (Math.abs(finalEquity - expectedBalance) > 0.01) {
+                equityHistory[equityHistory.length - 1] = expectedBalance;
+            }
+        }
+
         const totalProfit = balance - actualStartingBalance;
         const percentageGain = (totalProfit / actualStartingBalance) * 100;
         const totalTrades = filteredDeals.length;
 
-        const firstTradeDate = new Date(filteredDeals[0]?.time);
-        const lastTradeDate = new Date(filteredDeals[filteredDeals.length - 1]?.time);
+        const firstTradeDate = new Date(allTradingDeals[0]?.time);
+        const lastTradeDate = new Date(allTradingDeals[allTradingDeals.length - 1]?.time);
         const tradingDays = Math.floor((lastTradeDate - firstTradeDate) / (1000 * 60 * 60 * 24)) + 1;
 
         const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit;
