@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const dealInfo = [];
 
         // Add starting point
-        labels.push('START');
+        const startDate = allTradingDeals[0] ? new Date(allTradingDeals[0].time).toLocaleDateString() : new Date().toLocaleDateString();
+        labels.push(startDate);
         equityHistory.push(actualStartingBalance);
         dealInfo.push({
             time: allTradingDeals[0]?.time || new Date().toISOString(),
@@ -65,8 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (cumulative > peak) peak = cumulative;
 
-            // Add each trade as a separate point on the graph
-            labels.push(`Trade ${i + 1}`);
+            // Add each trade as a separate point on the graph with actual date
+            const tradeDate = new Date(deal.time).toLocaleDateString();
+            labels.push(tradeDate);
             equityHistory.push(parseFloat(cumulative.toFixed(2)));
             dealInfo.push({
                 time: deal.time,
@@ -229,7 +231,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 scales: {
                     x: {
                         ticks: {
-                            display: false
+                            color: '#cbd5e1',
+                            font: { family: 'Roboto Mono', size: 10 },
+                            maxRotation: 45,
+                            minRotation: 45
                         },
                         grid: {
                             color: 'rgba(100,116,139,0.2)'
