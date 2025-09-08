@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     let equityChart;
-    const initialBalance = 10000;
 
     async function fetchHistory() {
         const response = await fetch('https://iucapitalfund.com/api/get_history');
@@ -11,21 +10,32 @@ document.addEventListener("DOMContentLoaded", () => {
         accountTable.innerHTML = "";
         dealTable.innerHTML = "";
 
+        // Calculate actual starting balance from deposit/withdrawal transactions
+        const depositWithdrawals = data.deals
+            .filter(deal => deal.comment === "Deposit" || deal.comment.includes("Withdrawal"))
+            .sort((a, b) => new Date(a.time) - new Date(b.time));
+        
+        let actualStartingBalance = 0;
+        for (const transaction of depositWithdrawals) {
+            actualStartingBalance += parseFloat(transaction.profit);
+        }
+
         const filteredDeals = data.deals
             .filter(deal => deal.symbol && deal.symbol !== "US30" && !isNaN(deal.profit))
+            .filter(deal => deal.comment !== "Deposit" && !deal.comment.includes("Withdrawal"))
             .filter(deal => {
                 const p = parseFloat(deal.profit);
                 return p > 1 || p < -1;
             })
             .sort((a, b) => new Date(a.time) - new Date(b.time));
 
-        const balance = parseFloat(data.account.balance || initialBalance);
-        let cumulative = initialBalance;
+        const balance = parseFloat(data.account.balance || actualStartingBalance);
+        let cumulative = actualStartingBalance;
         let grossProfit = 0;
         let grossLoss = 0;
         let wins = 0;
         let losses = 0;
-        let peak = initialBalance;
+        let peak = actualStartingBalance;
 
         const equityHistory = [];
         const labels = [];
@@ -34,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const firstDate = new Date(filteredDeals[0]?.time);
         const startDateKey = firstDate.toISOString().split('T')[0];
         labels.push(startDateKey);
-        equityHistory.push(initialBalance);
+        equityHistory.push(actualStartingBalance);
         dealInfo.push({
             time: firstDate.toISOString(),
             symbol: 'START',
@@ -57,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 losses++;
             }
 
-            peak = Math.max(peak, cumulative);
+            if (cumulative > peak) peak = cumulative;
 
             const dealDate = new Date(deal.time);
             const dateKey = dealDate.toISOString().split('T')[0];
@@ -81,8 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
             dealInfo.push(equityMap[date].deal);
         }
 
-        const totalProfit = balance - initialBalance;
-        const percentageGain = (totalProfit / initialBalance) * 100;
+        const totalProfit = balance - actualStartingBalance;
+        const percentageGain = (totalProfit / actualStartingBalance) * 100;
         const totalTrades = filteredDeals.length;
 
         const firstTradeDate = new Date(filteredDeals[0]?.time);
@@ -99,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const avgLoss = losses > 0 ? grossLoss / losses : 0;
         const profitLossRatio = avgLoss > 0 ? avgWin / avgLoss : avgWin;
 
-        let peakEquity = initialBalance;
+        let peakEquity = actualStartingBalance;
         let maxDrawdown = 0;
         for (const equity of equityHistory) {
             if (equity > peakEquity) peakEquity = equity;
@@ -128,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalVolume = filteredDeals.reduce((sum, deal) => sum + parseFloat(deal.volume || 0), 0);
 
-        accountTable.innerHTML += `<tr><th>Starting Balance</th><td>$${initialBalance.toFixed(2)}</td></tr>`;
+        accountTable.innerHTML += `<tr><th>Starting Balance</th><td>$${actualStartingBalance.toFixed(2)}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Current Balance</th><td>$${balance.toFixed(2)}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Total Profit / Loss</th><td class="profit ${profitClass}">$${totalProfit.toFixed(2)}</td></tr>`;
         accountTable.innerHTML += `<tr><th>Percentage Gain</th><td class="profit ${profitClass}">${percentageGain.toFixed(2)}%</td></tr>`;
