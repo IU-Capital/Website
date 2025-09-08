@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .filter(deal => !isNaN(deal.profit))
             .sort((a, b) => new Date(a.time) - new Date(b.time));
 
-        // Get filtered deals for display in the table (excluding US30 and small trades)
+        // Get filtered deals for display in the table (excluding small trades only)
         const filteredDeals = allTradingDeals
             .filter(deal => deal.symbol)
             .filter(deal => {
@@ -46,41 +46,35 @@ document.addEventListener("DOMContentLoaded", () => {
         const labels = [];
         const dealInfo = [];
 
-        const firstDate = new Date(allTradingDeals[0]?.time);
-        const startDateKey = firstDate.toISOString().split('T')[0];
-        labels.push(startDateKey);
+        // Add starting point
+        labels.push('START');
         equityHistory.push(actualStartingBalance);
         dealInfo.push({
-            time: firstDate.toISOString(),
+            time: allTradingDeals[0]?.time || new Date().toISOString(),
             symbol: 'START',
             type: '',
             volume: '',
             profit: '0.00'
         });
 
-        const equityMap = {};
-
-        // Build equity curve using ALL trading deals to match the actual balance
-        for (const deal of allTradingDeals) {
+        // Plot EVERY single trade as a separate point
+        for (let i = 0; i < allTradingDeals.length; i++) {
+            const deal = allTradingDeals[i];
             const profit = parseFloat(deal.profit);
             cumulative += profit;
 
             if (cumulative > peak) peak = cumulative;
 
-            const dealDate = new Date(deal.time);
-            const dateKey = dealDate.toISOString().split('T')[0];
-
-            // Only store the latest deal for each date for the graph
-            equityMap[dateKey] = {
-                equity: parseFloat(cumulative.toFixed(2)),
-                deal: {
-                    time: deal.time,
-                    symbol: deal.symbol || 'N/A',
-                    type: deal.type || 'N/A',
-                    volume: deal.volume || '0',
-                    profit: profit.toFixed(2)
-                }
-            };
+            // Add each trade as a separate point on the graph
+            labels.push(`Trade ${i + 1}`);
+            equityHistory.push(parseFloat(cumulative.toFixed(2)));
+            dealInfo.push({
+                time: deal.time,
+                symbol: deal.symbol || 'N/A',
+                type: deal.type || 'N/A',
+                volume: deal.volume || '0',
+                profit: profit.toFixed(2)
+            });
         }
 
         // Calculate statistics using filtered deals for display
@@ -93,13 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 grossLoss += Math.abs(profit);
                 losses++;
             }
-        }
-
-        const sortedDates = Object.keys(equityMap).sort();
-        for (const date of sortedDates) {
-            labels.push(date);
-            equityHistory.push(equityMap[date].equity);
-            dealInfo.push(equityMap[date].deal);
         }
 
         // Ensure the final equity value matches the current balance from API
@@ -229,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     pointHoverRadius: 6,
                     pointBorderWidth: 1.5,
                     fill: true,
-                    tension: 0.45,
+                    tension: 0,
                     borderWidth: 2
                 }]
             },
